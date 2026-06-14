@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Monthly Development Pulse Check</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy:   #1A3A5C;
+  --blue:   #2E75B6;
+  --blue-l: #EBF3FB;
+  --green:  #276221;
+  --green-l:#C6EFCE;
+  --amber:  #9C6500;
+  --amber-l:#FFEB9C;
+  --red:    #9C0006;
+  --red-l:  #FFC7CE;
+  --gray:   #595959;
+  --gray-l: #F5F5F5;
+  --border: #D0D7DE;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #F0F4F8; color: #1A1A2E; min-height: 100vh; }
+
+/* ── TOPBAR ── */
+.topbar { background: var(--navy); padding: 0 2rem; display: flex; align-items: center;
+  justify-content: space-between; height: 56px; position: sticky; top: 0; z-index: 100; }
+.topbar-title { color: #fff; font-size: 15px; font-weight: 600; }
+.topbar-right { display: flex; align-items: center; gap: 10px; }
+.btn-topbar { background: rgba(255,255,255,0.15); color: #fff;
+  border: 1px solid rgba(255,255,255,0.3); border-radius: 7px; padding: 6px 14px;
+  font-size: 12px; font-weight: 500; cursor: pointer; font-family: inherit; }
+.btn-topbar:hover { background: rgba(255,255,255,0.25); }
+
+/* ── BANNER ── */
+.setup-banner { background: #FFF8E1; border-bottom: 2px solid #FFD54F; padding: 12px 2rem;
+  display: flex; align-items: center; gap: 12px; font-size: 13px; color: #5D4037; }
+.setup-banner.connected { background: #E8F5E9; border-color: #66BB6A; color: #2E7D32; }
+
+/* ── PAGE ── */
+.page { max-width: 820px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+/* ══════════════════════════════════
+   INTRO PAGE
+══════════════════════════════════ */
+.intro-page { display: block; }
+.intro-hero { background: linear-gradient(135deg, var(--navy) 0%, #2E75B6 100%);
+  border-radius: 16px; padding: 2.5rem 2rem; margin-bottom: 1.5rem; color: #fff; }
+.intro-hero h1 { font-size: 26px; font-weight: 700; margin-bottom: 8px; line-height: 1.3; }
+.intro-hero p { font-size: 14px; opacity: 0.85; line-height: 1.8; max-width: 560px; }
+.intro-meta { display: flex; gap: 10px; margin-top: 1.25rem; flex-wrap: wrap; }
+.intro-tag { background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 20px; padding: 5px 14px; font-size: 12px; font-weight: 500; }
+
+.intro-sections { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1.5rem; }
+.intro-card { background: #fff; border-radius: 14px; border: 1px solid var(--border);
+  box-shadow: var(--shadow); padding: 1.25rem 1.5rem; }
+.intro-card-num { width: 32px; height: 32px; border-radius: 50%; display: flex;
+  align-items: center; justify-content: center; font-size: 14px; font-weight: 700;
+  margin-bottom: 10px; }
+.ic1 .intro-card-num { background: var(--blue-l); color: var(--blue); }
+.ic2 .intro-card-num { background: var(--amber-l); color: var(--amber); }
+.ic3 .intro-card-num { background: var(--green-l); color: var(--green); }
+.ic4 .intro-card-num { background: #EAD1DC; color: #7030A0; }
+.intro-card h3 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+.intro-card p  { font-size: 13px; color: var(--gray); line-height: 1.65; }
+.intro-card ul { list-style: none; padding: 0; margin-top: 8px; }
+.intro-card ul li { font-size: 12px; color: var(--gray); padding: 4px 0;
+  border-bottom: 1px solid #F5F5F5; display: flex; align-items: flex-start; gap: 6px; }
+.intro-card ul li:last-child { border-bottom: none; }
+.intro-card ul li::before { content: "→"; color: var(--blue); font-weight: 700; flex-shrink: 0; }
+
+.legend-card { background: #fff; border-radius: 14px; border: 1px solid var(--border);
+  box-shadow: var(--shadow); padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; }
+.legend-card h3 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 12px; }
+.legend-row { display: flex; gap: 10px; flex-wrap: wrap; }
+.legend-item { display: flex; align-items: center; gap: 8px; background: #fafafa;
+  border: 1px solid var(--border); border-radius: 8px; padding: 8px 14px; }
+.legend-dot { width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center; font-size: 12px; }
+.ld-green { background: var(--green-l); }
+.ld-amber { background: var(--amber-l); }
+.ld-red   { background: var(--red-l); }
+.ld-gray  { background: #E0E0E0; }
+.legend-item span { font-size: 12px; color: var(--navy); font-weight: 500; }
+.legend-item small { font-size: 11px; color: var(--gray); display: block; }
+
+.intro-rules { background: #fff; border-radius: 14px; border: 1px solid var(--border);
+  box-shadow: var(--shadow); padding: 1.25rem 1.5rem; margin-bottom: 1.5rem; }
+.intro-rules h3 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+.rule-row { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0;
+  border-bottom: 1px solid #F5F5F5; font-size: 13px; }
+.rule-row:last-child { border-bottom: none; }
+.rule-icon { font-size: 18px; flex-shrink: 0; }
+.rule-text strong { display: block; color: var(--navy); font-size: 13px; margin-bottom: 2px; }
+.rule-text span { color: var(--gray); font-size: 12px; line-height: 1.5; }
+
+.intro-start { text-align: center; padding: 1rem 0 0.5rem; }
+.btn-start { background: var(--navy); color: #fff; border: none; border-radius: 12px;
+  padding: 16px 56px; font-size: 16px; font-weight: 700; cursor: pointer;
+  font-family: inherit; transition: all .15s; letter-spacing: -0.2px; }
+.btn-start:hover { background: var(--blue); transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(26,58,92,0.3); }
+.start-hint { font-size: 12px; color: var(--gray); margin-top: 10px; }
+
+/* ══════════════════════════════════
+   FORM PAGE
+══════════════════════════════════ */
+.form-page { display: none; }
+.hero { background: #fff; border-radius: 14px; padding: 2rem; border: 1px solid var(--border);
+  box-shadow: var(--shadow); margin-bottom: 1.5rem; }
+.hero-eyebrow { font-size: 11px; font-weight: 700; color: var(--blue); letter-spacing: 0.08em;
+  text-transform: uppercase; margin-bottom: 8px; }
+.hero h2 { font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+.hero p { font-size: 13px; color: var(--gray); line-height: 1.7; }
+.hero-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 1.25rem; }
+.hero-fields label { font-size: 12px; font-weight: 600; color: var(--navy); display: block; margin-bottom: 5px; }
+.hero-fields input { width: 100%; padding: 9px 12px; border: 1.5px solid var(--border);
+  border-radius: 8px; font-size: 14px; font-family: inherit; background: var(--gray-l); }
+.hero-fields input:focus { outline: none; border-color: var(--blue); background: #fff; }
+
+.section-card { background: #fff; border-radius: 14px; border: 1px solid var(--border);
+  box-shadow: var(--shadow); margin-bottom: 1.25rem; overflow: hidden; }
+.section-head { padding: 1rem 1.5rem; border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 12px; }
+.section-num { width: 28px; height: 28px; border-radius: 50%; display: flex;
+  align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+.s1 .section-num { background: var(--blue-l); color: var(--blue); }
+.s2 .section-num { background: var(--amber-l); color: var(--amber); }
+.s3 .section-num { background: var(--green-l); color: var(--green); }
+.s4 .section-num { background: #EAD1DC; color: #7030A0; }
+.section-head-text h2 { font-size: 15px; font-weight: 600; color: var(--navy); }
+.section-head-text p  { font-size: 12px; color: var(--gray); margin-top: 1px; }
+.section-body { padding: 1.25rem 1.5rem; }
+
+.note-box { background: var(--blue-l); border-radius: 8px; padding: 10px 14px;
+  font-size: 13px; color: var(--blue); margin-bottom: 1rem; border: 1px solid #B5D4F4; }
+.friction-note { background: #FFF8E1; border: 1px solid #FFD54F; border-radius: 8px;
+  padding: 10px 14px; font-size: 13px; color: #7A5C00; margin-bottom: 1rem; }
+
+/* GOALS */
+.goal-headers { display: grid; grid-template-columns: 1fr 72px 72px 85px 96px;
+  gap: 5px; margin-bottom: 4px; }
+.goal-headers span { font-size: 10px; font-weight: 700; text-align: center;
+  padding: 4px 2px; border-radius: 5px; letter-spacing: 0.03em; }
+.gh-track  { background: var(--green-l); color: var(--green); }
+.gh-slow   { background: var(--amber-l); color: var(--amber); }
+.gh-noprog { background: var(--red-l);   color: var(--red); }
+.gh-nofit  { background: #E8E8E8; color: #555; }
+
+.goal-row { display: grid; grid-template-columns: 1fr 72px 72px 85px 96px;
+  gap: 5px; align-items: center; padding: 7px 0; border-bottom: 1px solid #F0F0F0; }
+.goal-row:last-of-type { border-bottom: none; }
+.goal-name-input { border: 1.5px solid var(--border); border-radius: 7px; padding: 7px 10px;
+  font-size: 13px; font-family: inherit; color: var(--navy); width: 100%; background: var(--gray-l); }
+.goal-name-input:focus { outline: none; border-color: var(--blue); background: #fff; }
+
+.status-radio { display: none; }
+.status-lbl { display: flex; align-items: center; justify-content: center; height: 34px;
+  border-radius: 7px; border: 1.5px solid var(--border); cursor: pointer; font-size: 16px;
+  transition: all .15s; background: #fafafa; }
+.status-lbl:hover { border-color: #aaa; background: #f0f0f0; }
+.status-radio.r-green:checked ~ label.status-lbl-green { background: var(--green-l); border-color: var(--green); }
+.status-radio.r-amber:checked ~ label.status-lbl-amber { background: var(--amber-l); border-color: var(--amber); }
+.status-radio.r-red:checked   ~ label.status-lbl-red   { background: var(--red-l);   border-color: var(--red); }
+.status-radio.r-gray:checked  ~ label.status-lbl-gray  { background: #E0E0E0; border-color: #888; }
+
+textarea { width: 100%; border: 1.5px solid var(--border); border-radius: 8px;
+  padding: 10px 12px; font-size: 13px; font-family: inherit; color: var(--navy);
+  background: var(--gray-l); resize: vertical; min-height: 70px; line-height: 1.6; }
+textarea:focus { outline: none; border-color: var(--blue); background: #fff; }
+.field-label { font-size: 12px; font-weight: 600; color: var(--navy); margin-bottom: 6px; display: block; }
+
+/* BLOCKERS */
+.blocker-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 1rem; }
+.blocker-radio { display: none; }
+.blocker-lbl { display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 4px; padding: 14px 8px; border: 1.5px solid var(--border); border-radius: 10px;
+  cursor: pointer; font-size: 12px; font-weight: 500; color: var(--gray);
+  text-align: center; background: var(--gray-l); transition: all .15s; line-height: 1.4; }
+.blocker-lbl .icon { font-size: 22px; }
+.blocker-lbl:hover { background: var(--blue-l); border-color: var(--blue); color: var(--navy); }
+.blocker-radio:checked + .blocker-lbl { background: var(--blue-l); border-color: var(--blue);
+  color: var(--navy); box-shadow: 0 0 0 3px rgba(46,117,182,0.15); }
+
+/* ACTIVITIES */
+.activity-block { background: #FAFFFE; border: 1px solid #C8E6C9; border-radius: 10px;
+  padding: 1rem 1.25rem; margin-bottom: 10px; }
+.activity-title { font-size: 13px; font-weight: 600; color: var(--green); margin-bottom: 10px; }
+.activity-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+.act-input { width: 100%; padding: 8px 10px; border: 1.5px solid var(--border); border-radius: 7px;
+  font-size: 13px; font-family: inherit; background: var(--gray-l); }
+.act-input:focus { outline: none; border-color: var(--green); background: #fff; }
+
+.pill-group { display: flex; gap: 6px; flex-wrap: wrap; }
+.pill-radio { display: none; }
+.pill-lbl { padding: 5px 14px; border: 1.5px solid var(--border); border-radius: 20px;
+  font-size: 12px; color: var(--gray); cursor: pointer; transition: all .15s; background: #fff; }
+.pill-lbl:hover { background: var(--green-l); border-color: var(--green); }
+.pill-radio.p-done:checked     + .pill-lbl { background: var(--green-l); border-color: var(--green); color: var(--green); font-weight: 600; }
+.pill-radio.p-progress:checked + .pill-lbl { background: var(--amber-l); border-color: var(--amber); color: var(--amber); font-weight: 600; }
+.pill-radio.p-abandon:checked  + .pill-lbl { background: var(--red-l);   border-color: var(--red);   color: var(--red);   font-weight: 600; }
+
+.score-group { display: flex; gap: 6px; align-items: center; }
+.score-radio { display: none; }
+.score-lbl { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+  border: 1.5px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 14px;
+  font-weight: 600; color: var(--gray); background: #fafafa; transition: all .15s; }
+.score-lbl:hover { background: var(--green-l); border-color: var(--green); }
+.score-radio:checked + .score-lbl { background: var(--green-l); border-color: var(--green); color: var(--green); }
+.score-hint { font-size: 11px; color: var(--gray); margin-left: 8px; }
+
+.mvq-block { background: #FDF4FF; border: 1px solid #CE93D8; border-radius: 10px;
+  padding: 1rem 1.25rem; margin-bottom: 10px; }
+.mvq-block .field-label { color: #7030A0; }
+
+/* SUBMIT */
+.submit-area { text-align: center; margin-top: 1.5rem; }
+.btn-submit { background: var(--navy); color: #fff; border: none; border-radius: 10px;
+  padding: 14px 48px; font-size: 15px; font-weight: 600; cursor: pointer;
+  font-family: inherit; transition: all .15s; }
+.btn-submit:hover:not(:disabled) { background: var(--blue); transform: translateY(-1px); }
+.btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+.submit-hint { font-size: 12px; color: var(--gray); margin-top: 10px; }
+
+/* SENDING */
+.sending-overlay { display: none; position: fixed; inset: 0; background: rgba(26,58,92,0.75);
+  z-index: 999; align-items: center; justify-content: center; flex-direction: column; gap: 16px; }
+.sending-overlay.show { display: flex; }
+.spinner { width: 44px; height: 44px; border: 4px solid rgba(255,255,255,0.3);
+  border-top-color: #fff; border-radius: 50%; animation: spin .8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.sending-text { color: #fff; font-size: 16px; font-weight: 500; }
+
+/* SUCCESS */
+.success-screen { display: none; background: #fff; border-radius: 14px; border: 1px solid var(--border);
+  box-shadow: var(--shadow); padding: 3rem 2rem; text-align: center; }
+.success-icon { font-size: 52px; margin-bottom: 1rem; }
+.success-screen h2 { font-size: 22px; font-weight: 700; color: var(--green); margin-bottom: 8px; }
+.success-screen p { font-size: 14px; color: var(--gray); max-width: 380px; margin: 0 auto 1.5rem; line-height: 1.7; }
+.btn-secondary { background: var(--blue-l); color: var(--blue); border: 1.5px solid var(--blue);
+  border-radius: 8px; padding: 10px 24px; font-size: 14px; font-weight: 600;
+  cursor: pointer; font-family: inherit; }
+
+/* SETUP MODAL */
+.modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55);
+  z-index: 500; align-items: center; justify-content: center; padding: 1rem; }
+.modal-overlay.show { display: flex; }
+.modal { background: #fff; border-radius: 16px; padding: 2rem; max-width: 580px; width: 100%;
+  max-height: 90vh; overflow-y: auto; }
+.modal h2 { font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+.modal .sub { font-size: 13px; color: var(--gray); margin-bottom: 1.5rem; line-height: 1.6; }
+.step-block { background: var(--gray-l); border-radius: 10px; padding: 1rem 1.25rem;
+  margin-bottom: 10px; border-left: 4px solid var(--blue); }
+.step-block h3 { font-size: 13px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+.step-block p  { font-size: 13px; color: var(--gray); line-height: 1.6; }
+.step-block a  { color: var(--blue); font-weight: 600; }
+.code-block { background: #1e2a3a; color: #a8d8a8; font-family: monospace; font-size: 11.5px;
+  padding: 12px 14px; border-radius: 8px; margin: 8px 0; white-space: pre-wrap;
+  word-break: break-all; line-height: 1.6; position: relative; }
+.copy-btn { position: absolute; top: 8px; right: 8px; background: rgba(255,255,255,0.15);
+  color: #fff; border: none; border-radius: 5px; padding: 3px 8px; font-size: 11px; cursor: pointer; }
+.copy-btn:hover { background: rgba(255,255,255,0.25); }
+.url-input { width: 100%; padding: 9px 12px; border: 1.5px solid var(--border); border-radius: 8px;
+  font-size: 13px; font-family: inherit; margin-top: 8px; }
+.url-input:focus { outline: none; border-color: var(--blue); }
+.btn-save-url { background: var(--navy); color: #fff; border: none; border-radius: 8px;
+  padding: 9px 20px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; margin-top: 8px; }
+.modal-close { float: right; background: none; border: none; font-size: 20px;
+  cursor: pointer; color: var(--gray); line-height: 1; }
+
+/* MANAGER PASSWORD MODAL */
+.pwd-modal { background: #fff; border-radius: 16px; padding: 2rem; max-width: 360px; width: 100%; text-align: center; }
+.pwd-modal h2 { font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+.pwd-modal p { font-size: 13px; color: var(--gray); margin-bottom: 1.25rem; }
+.pwd-input { width: 100%; padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 8px;
+  font-size: 15px; text-align: center; font-family: inherit; letter-spacing: 0.1em; }
+.pwd-input:focus { outline: none; border-color: var(--blue); }
+.pwd-error { color: var(--red); font-size: 12px; margin-top: 6px; display: none; }
+.btn-pwd { background: var(--navy); color: #fff; border: none; border-radius: 8px;
+  padding: 10px 24px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit;
+  margin-top: 10px; width: 100%; }
+
+/* MANAGER DASHBOARD */
+.mgr-page { display: none; }
+.mgr-header { background: var(--navy); color: #fff; border-radius: 14px; padding: 1.25rem 1.5rem;
+  margin-bottom: 1.25rem; display: flex; align-items: center; justify-content: space-between; }
+.mgr-header h2 { font-size: 17px; font-weight: 700; }
+.mgr-header p { font-size: 12px; opacity: 0.7; margin-top: 2px; }
+.kpi-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 10px; margin-bottom: 1.25rem; }
+.kpi-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 1rem; text-align: center; }
+.kpi-num { font-size: 28px; font-weight: 700; }
+.kpi-lbl { font-size: 11px; color: var(--gray); margin-top: 3px; font-weight: 500; }
+.k-all .kpi-num   { color: var(--navy); }
+.k-green .kpi-num { color: var(--green); }
+.k-amber .kpi-num { color: var(--amber); }
+.k-red .kpi-num   { color: var(--red); }
+.emp-list { display: flex; flex-direction: column; gap: 10px; }
+.emp-card { background: #fff; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.emp-card-head { padding: 12px 1.25rem; display: flex; align-items: center;
+  justify-content: space-between; cursor: pointer; }
+.emp-card-head:hover { background: var(--gray-l); }
+.emp-name { font-size: 15px; font-weight: 600; color: var(--navy); }
+.emp-month { font-size: 12px; color: var(--gray); }
+.action-badge { padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+.badge-green { background: var(--green-l); color: var(--green); }
+.badge-amber { background: var(--amber-l); color: var(--amber); }
+.badge-red   { background: var(--red-l);   color: var(--red); }
+.emp-card-body { display: none; padding: 0 1.25rem 1.25rem; border-top: 1px solid #F0F0F0; }
+.emp-card-body.open { display: block; }
+.detail-section { margin-top: 1rem; }
+.detail-section h4 { font-size: 11px; font-weight: 700; color: var(--gray);
+  text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 8px; }
+.goals-pills { display: flex; gap: 6px; flex-wrap: wrap; }
+.goal-pill { padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 500; }
+.gp-green { background: var(--green-l); color: var(--green); }
+.gp-amber { background: var(--amber-l); color: var(--amber); }
+.gp-red   { background: var(--red-l);   color: var(--red); }
+.gp-gray  { background: #E0E0E0; color: #555; }
+.detail-row { display: flex; justify-content: space-between; font-size: 13px;
+  padding: 5px 0; border-bottom: 1px solid #F5F5F5; }
+.detail-row:last-child { border-bottom: none; }
+.detail-row .lbl { color: var(--gray); }
+.detail-row .val { color: var(--navy); font-weight: 500; max-width: 60%; text-align: right; }
+.text-preview { font-size: 13px; color: #444; background: var(--gray-l); padding: 8px 12px;
+  border-radius: 7px; line-height: 1.6; margin-top: 4px; border-left: 3px solid var(--blue); }
+.empty-state { text-align: center; padding: 3rem 1rem; color: var(--gray); background: #fff;
+  border-radius: 14px; border: 1px solid var(--border); }
+.btn-export { background: #fff; color: var(--navy); border: 1.5px solid var(--border);
+  border-radius: 8px; padding: 8px 18px; font-size: 13px; font-weight: 500;
+  cursor: pointer; font-family: inherit; }
+.btn-export:hover { background: var(--gray-l); }
+
+@media (max-width:600px) {
+  .intro-sections { grid-template-columns: 1fr; }
+  .goal-headers, .goal-row { grid-template-columns: 1fr 58px 58px 68px 78px; }
+  .blocker-grid { grid-template-columns: 1fr 1fr; }
+  .activity-row { grid-template-columns: 1fr; }
+  .hero-fields { grid-template-columns: 1fr; }
+  .kpi-row { grid-template-columns: 1fr 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- SENDING OVERLAY -->
+<div class="sending-overlay" id="sending-overlay">
+  <div class="spinner"></div>
+  <div class="sending-text">Sending to Google Sheets…</div>
+</div>
+
+<!-- SETUP MODAL -->
+<div class="modal-overlay" id="setup-modal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <h2>🔧 Connect to Google Sheets</h2>
+    <p class="sub">One-time setup — takes 5 minutes. After this, every submission goes directly to your sheet.</p>
+    <div class="step-block">
+      <h3>Step 1 — Create the Google Sheet</h3>
+      <p>Go to <a href="https://sheets.new" target="_blank">sheets.new</a> → name it <strong>"Pulse Check Responses"</strong>.</p>
+    </div>
+    <div class="step-block">
+      <h3>Step 2 — Open Apps Script</h3>
+      <p>Click <strong>Extensions → Apps Script</strong>. Delete existing code and paste this:</p>
+      <div class="code-block" id="apps-script-code">const SHEET_NAME = "Responses";
+
+function doPost(e) {
+  try {
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    let sheet = ss.getSheetByName(SHEET_NAME);
+    if (!sheet) {
+      sheet = ss.insertSheet(SHEET_NAME);
+      const headers = ["Timestamp","Name","Month",
+        "Goal 1","G1 Status","Goal 2","G2 Status","Goal 3","G3 Status",
+        "Goal 4","G4 Status","Goal 5","G5 Status","Section 1 Comment",
+        "Blocker","Blocker Description",
+        "Course 1","C1 Status","C1 Score","Course 2","C2 Status","C2 Score",
+        "Course 3","C3 Status","C3 Score","Course 4","C4 Status","C4 Score",
+        "Course 5","C5 Status","C5 Score",
+        "Key Development Need","Micro-Win","Action Required"];
+      sheet.appendRow(headers);
+      sheet.getRange(1,1,1,headers.length)
+           .setFontWeight("bold").setBackground("#1A3A5C").setFontColor("#FFFFFF");
+    }
+    const d = JSON.parse(e.postData.contents);
+    sheet.appendRow([
+      new Date().toLocaleString("en-GB"), d.name, d.month,
+      d.g1name,d.g1status, d.g2name,d.g2status, d.g3name,d.g3status,
+      d.g4name,d.g4status, d.g5name,d.g5status, d.s1comment,
+      d.blocker, d.blockerDesc,
+      d.c1name,d.c1status,d.c1score, d.c2name,d.c2status,d.c2score,
+      d.c3name,d.c3status,d.c3score, d.c4name,d.c4status,d.c4score,
+      d.c5name,d.c5status,d.c5score,
+      d.s4a, d.s4b, d.action
+    ]);
+    const lastRow = sheet.getLastRow();
+    const actionCell = sheet.getRange(lastRow, 34);
+    if (d.action==="No Meeting")   actionCell.setBackground("#C6EFCE").setFontColor("#276221");
+    if (d.action==="15-Min Call")  actionCell.setBackground("#FFEB9C").setFontColor("#9C6500");
+    if (d.action==="Full Meeting") actionCell.setBackground("#FFC7CE").setFontColor("#9C0006");
+    return ContentService.createTextOutput(JSON.stringify({status:"ok"}))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch(err) {
+    return ContentService.createTextOutput(JSON.stringify({status:"error",message:err.toString()}))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
+}
+function doGet() {
+  return ContentService.createTextOutput("Pulse Check API running.")
+    .setMimeType(ContentService.MimeType.TEXT);
+}</div>
+      <button class="copy-btn" onclick="copyScript()">Copy</button>
+    </div>
+    <div class="step-block">
+      <h3>Step 3 — Deploy as Web App</h3>
+      <p>Click <strong>Deploy → New Deployment</strong> · Type: <strong>Web app</strong> · Execute as: <strong>Me</strong> · Access: <strong>Anyone</strong> · Deploy → authorize → copy the <strong>Web App URL</strong>.</p>
+    </div>
+    <div class="step-block" style="border-color:var(--green)">
+      <h3>Step 4 — Paste the URL here</h3>
+      <input class="url-input" type="text" id="webhook-url-input" placeholder="https://script.google.com/macros/s/…/exec" />
+      <br><button class="btn-save-url" onclick="saveWebhookUrl()">✅ Save & Connect</button>
+    </div>
+  </div>
+</div>
+
+<!-- MANAGER PASSWORD MODAL -->
+<div class="modal-overlay" id="pwd-modal">
+  <div class="pwd-modal">
+    <div style="font-size:36px;margin-bottom:10px;">🔒</div>
+    <h2>HR Team Access</h2>
+    <p>Enter the HR team password to view all responses</p>
+    <input class="pwd-input" type="password" id="pwd-input" placeholder="••••••••" onkeydown="if(event.key==='Enter')checkPwd()" />
+    <div class="pwd-error" id="pwd-error">Incorrect password. Try again.</div>
+    <button class="btn-pwd" onclick="checkPwd()">Enter Dashboard</button>
+    <div style="margin-top:12px;">
+      <button onclick="closePwdModal()" style="background:none;border:none;color:var(--gray);font-size:13px;cursor:pointer;">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════ TOP BAR ══════════ -->
+<div class="topbar">
+  <span class="topbar-title">Development Pulse Check</span>
+  <div class="topbar-right">
+    <span id="connection-dot" style="font-size:12px;color:#aaa;">⚪ Not connected</span>
+    <button class="btn-topbar" onclick="openModal()">🔧 Setup</button>
+    <button class="btn-topbar" onclick="openPwdModal()" id="mgr-btn">📊 HR Team</button>
+  </div>
+</div>
+
+<!-- CONNECTION BANNER -->
+<div class="setup-banner" id="setup-banner">
+  ⚠️ <strong>Not connected yet.</strong> Click <strong>🔧 Setup</strong> to link this form to your Google Sheet.
+</div>
+
+<!-- ════════════ INTRO PAGE ════════════ -->
+<div class="intro-page" id="intro-page">
+<div class="page">
+
+  <div class="intro-hero">
+    <h1>Monthly Development<br>Pulse Check</h1>
+    <p>This monthly check-in replaces the standard meeting. Your honest answers help me, in the HR team, understand your progress and give you the right kind of support for your development plan — without unnecessary meetings.</p>
+    <div class="intro-meta">
+      <span class="intro-tag">⏱ Takes less than 10 minutes</span>
+      <span class="intro-tag">🔒 Only the HR team sees your answers</span>
+      <span class="intro-tag">📊 4 sections</span>
+    </div>
+  </div>
+
+  <div class="intro-sections">
+    <div class="intro-card ic1">
+      <div class="intro-card-num">1</div>
+      <h3>Goal Progress Snapshot</h3>
+      <p>Rate each of your development goals using the color-coded status buttons. You have up to <strong>5 goals</strong>.</p>
+      <ul>
+        <li>Write a short description of each goal</li>
+        <li>Pick the status that fits best</li>
+        <li>Add a comment if you need to explain</li>
+      </ul>
+    </div>
+    <div class="intro-card ic2">
+      <div class="intro-card-num">2</div>
+      <h3>Friction Diagnostic</h3>
+      <p>Only fill this in if one or more goals are slow or stalled. This helps me understand <strong>why</strong> — not just what.</p>
+      <ul>
+        <li>Pick the main blocker type</li>
+        <li>Write one sentence describing the situation</li>
+        <li>Skip entirely if all goals are green ✅</li>
+      </ul>
+    </div>
+    <div class="intro-card ic3">
+      <div class="intro-card-num">3</div>
+      <h3>Learning & Course Effectiveness</h3>
+      <p>List up to <strong>5 learning activities</strong> you engaged with this month — courses, workshops, books, or videos.</p>
+      <ul>
+        <li>Name or link to the course</li>
+        <li>Mark completion status</li>
+        <li>Rate how much you've applied it (1–5)</li>
+      </ul>
+    </div>
+    <div class="intro-card ic4">
+      <div class="intro-card-num">4</div>
+      <h3>The Single Most Valuable Question</h3>
+      <p>The most important section. Two questions that unlock real development conversations.</p>
+      <ul>
+        <li>What ONE skill would change your work most next month?</li>
+        <li>Share a micro-win — even small progress counts</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="legend-card">
+    <h3>🎨 Color Guide — Goal Status Buttons</h3>
+    <div class="legend-row">
+      <div class="legend-item">
+        <div class="legend-dot ld-green">✅</div>
+        <div><span>On Track</span><small>Progress is good, no issues</small></div>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot ld-amber">🟡</div>
+        <div><span>Slow Progress</span><small>Moving, but behind pace</small></div>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot ld-red">🔴</div>
+        <div><span>No Progress</span><small>Completely stalled</small></div>
+      </div>
+      <div class="legend-item">
+        <div class="legend-dot ld-gray">⬜</div>
+        <div><span>No Longer Fits</span><small>Goal is no longer relevant</small></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="intro-rules">
+    <h3>📋 What happens after you submit?</h3>
+    <div class="rule-row">
+      <div class="rule-icon">✅</div>
+      <div class="rule-text">
+        <strong>All goals green → No meeting needed</strong>
+        <span>I will see your response and take note. No action required from either side.</span>
+      </div>
+    </div>
+    <div class="rule-row">
+      <div class="rule-icon">📞</div>
+      <div class="rule-text">
+        <strong>Mixed results → 15-minute call</strong>
+        <span>If some goals are slow, I may schedule a quick check-in to help unblock you.</span>
+      </div>
+    </div>
+    <div class="rule-row">
+      <div class="rule-icon">🗓</div>
+      <div class="rule-text">
+        <strong>Any goal with no progress → Full meeting</strong>
+        <span>I will schedule a dedicated session to understand the situation and support you.</span>
+      </div>
+    </div>
+    <div class="rule-row">
+      <div class="rule-icon">🔒</div>
+      <div class="rule-text">
+        <strong>Your answers are private</strong>
+        <span>Only the HR team can see your responses. Other employees cannot view what you submitted.</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="intro-start">
+    <button class="btn-start" onclick="startForm()">Start My Check-in →</button>
+    <p class="start-hint">You'll be able to review everything before submitting</p>
+  </div>
+
+</div>
+</div>
+
+<!-- ════════════ FORM PAGE ════════════ -->
+<div class="form-page" id="form-page">
+<div class="page">
+
+  <div class="success-screen" id="success-screen">
+    <div class="success-icon">✅</div>
+    <h2>Response submitted!</h2>
+    <p>Your check-in has been saved. I will review it and reach out only if a meeting is needed.</p>
+    <button class="btn-secondary" onclick="resetForm()">Submit another response</button>
+  </div>
+
+  <div id="form-content">
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hero-eyebrow">Monthly Check-in</div>
+      <h2>Development Pulse Check</h2>
+      <p>Fill in all 4 sections below. Your answers go directly to me in the HR team and are not visible to other employees.</p>
+      <div class="hero-fields">
+        <div><label>Employee Name</label><input type="text" id="emp-name" placeholder="Your full name" /></div>
+        <div><label>Month / Year</label><input type="text" id="month-year" placeholder="e.g. June 2026" /></div>
+      </div>
+    </div>
+
+    <!-- SECTION 1 — 5 GOALS -->
+    <div class="section-card s1">
+      <div class="section-head">
+        <div class="section-num">1</div>
+        <div class="section-head-text">
+          <h2>Goal Progress Snapshot</h2>
+          <p>Rate each goal from your development plan — up to 5 goals</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="note-box">💡 Goals are from your last development plan conclusion email</div>
+        <div class="goal-headers">
+          <span></span>
+          <span class="gh-track">✅ On Track</span>
+          <span class="gh-slow">🟡 Slow</span>
+          <span class="gh-noprog">🔴 No Progress</span>
+          <span class="gh-nofit">⬜ No Longer Fits</span>
+        </div>
+        <!-- 5 goal rows -->
+        <div class="goal-row">
+          <input class="goal-name-input" type="text" id="g1name" placeholder="Goal 1" />
+          <div><input type="radio" class="status-radio r-green" name="g1" id="g1g" value="On Track"><label class="status-lbl status-lbl-green" for="g1g">✅</label></div>
+          <div><input type="radio" class="status-radio r-amber" name="g1" id="g1a" value="Slow"><label class="status-lbl status-lbl-amber" for="g1a">🟡</label></div>
+          <div><input type="radio" class="status-radio r-red"   name="g1" id="g1r" value="No Progress"><label class="status-lbl status-lbl-red" for="g1r">🔴</label></div>
+          <div><input type="radio" class="status-radio r-gray"  name="g1" id="g1x" value="No Longer Fits"><label class="status-lbl status-lbl-gray" for="g1x">⬜</label></div>
+        </div>
+        <div class="goal-row">
+          <input class="goal-name-input" type="text" id="g2name" placeholder="Goal 2" />
+          <div><input type="radio" class="status-radio r-green" name="g2" id="g2g" value="On Track"><label class="status-lbl status-lbl-green" for="g2g">✅</label></div>
+          <div><input type="radio" class="status-radio r-amber" name="g2" id="g2a" value="Slow"><label class="status-lbl status-lbl-amber" for="g2a">🟡</label></div>
+          <div><input type="radio" class="status-radio r-red"   name="g2" id="g2r" value="No Progress"><label class="status-lbl status-lbl-red" for="g2r">🔴</label></div>
+          <div><input type="radio" class="status-radio r-gray"  name="g2" id="g2x" value="No Longer Fits"><label class="status-lbl status-lbl-gray" for="g2x">⬜</label></div>
+        </div>
+        <div class="goal-row">
+          <input class="goal-name-input" type="text" id="g3name" placeholder="Goal 3 (optional)" />
+          <div><input type="radio" class="status-radio r-green" name="g3" id="g3g" value="On Track"><label class="status-lbl status-lbl-green" for="g3g">✅</label></div>
+          <div><input type="radio" class="status-radio r-amber" name="g3" id="g3a" value="Slow"><label class="status-lbl status-lbl-amber" for="g3a">🟡</label></div>
+          <div><input type="radio" class="status-radio r-red"   name="g3" id="g3r" value="No Progress"><label class="status-lbl status-lbl-red" for="g3r">🔴</label></div>
+          <div><input type="radio" class="status-radio r-gray"  name="g3" id="g3x" value="No Longer Fits"><label class="status-lbl status-lbl-gray" for="g3x">⬜</label></div>
+        </div>
+        <div class="goal-row">
+          <input class="goal-name-input" type="text" id="g4name" placeholder="Goal 4 (optional)" />
+          <div><input type="radio" class="status-radio r-green" name="g4" id="g4g" value="On Track"><label class="status-lbl status-lbl-green" for="g4g">✅</label></div>
+          <div><input type="radio" class="status-radio r-amber" name="g4" id="g4a" value="Slow"><label class="status-lbl status-lbl-amber" for="g4a">🟡</label></div>
+          <div><input type="radio" class="status-radio r-red"   name="g4" id="g4r" value="No Progress"><label class="status-lbl status-lbl-red" for="g4r">🔴</label></div>
+          <div><input type="radio" class="status-radio r-gray"  name="g4" id="g4x" value="No Longer Fits"><label class="status-lbl status-lbl-gray" for="g4x">⬜</label></div>
+        </div>
+        <div class="goal-row">
+          <input class="goal-name-input" type="text" id="g5name" placeholder="Goal 5 (optional)" />
+          <div><input type="radio" class="status-radio r-green" name="g5" id="g5g" value="On Track"><label class="status-lbl status-lbl-green" for="g5g">✅</label></div>
+          <div><input type="radio" class="status-radio r-amber" name="g5" id="g5a" value="Slow"><label class="status-lbl status-lbl-amber" for="g5a">🟡</label></div>
+          <div><input type="radio" class="status-radio r-red"   name="g5" id="g5r" value="No Progress"><label class="status-lbl status-lbl-red" for="g5r">🔴</label></div>
+          <div><input type="radio" class="status-radio r-gray"  name="g5" id="g5x" value="No Longer Fits"><label class="status-lbl status-lbl-gray" for="g5x">⬜</label></div>
+        </div>
+        <div style="margin-top:1rem">
+          <label class="field-label">Additional comments (optional)</label>
+          <textarea id="s1comment" placeholder="Any context about your goals…"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2 -->
+    <div class="section-card s2">
+      <div class="section-head">
+        <div class="section-num">2</div>
+        <div class="section-head-text">
+          <h2>Friction Diagnostic</h2>
+          <p>Only answer if you selected 🟡 or 🔴 above — skip if all green</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="friction-note">⚠️ Skip this section if all your goals are on track or no longer relevant</div>
+        <label class="field-label" style="margin-bottom:10px;">Primary blocker:</label>
+        <div class="blocker-grid">
+          <div><input type="radio" class="blocker-radio" name="blocker" id="bl1" value="Workload"><label class="blocker-lbl" for="bl1"><span class="icon">⏳</span>Workload</label></div>
+          <div><input type="radio" class="blocker-radio" name="blocker" id="bl2" value="Clarity"><label class="blocker-lbl" for="bl2"><span class="icon">❓</span>Clarity</label></div>
+          <div><input type="radio" class="blocker-radio" name="blocker" id="bl3" value="Resources"><label class="blocker-lbl" for="bl3"><span class="icon">🔧</span>Resources</label></div>
+          <div><input type="radio" class="blocker-radio" name="blocker" id="bl4" value="Passion/Relevance"><label class="blocker-lbl" for="bl4"><span class="icon">💡</span>Passion / Relevance</label></div>
+          <div><input type="radio" class="blocker-radio" name="blocker" id="bl5" value="Dependency"><label class="blocker-lbl" for="bl5"><span class="icon">🔗</span>Dependency</label></div>
+          <div><input type="radio" class="blocker-radio" name="blocker" id="bl6" value="Personal Capacity"><label class="blocker-lbl" for="bl6"><span class="icon">🙏</span>Personal Capacity</label></div>
+        </div>
+        <label class="field-label">Describe the situation in one sentence:</label>
+        <textarea id="blockerdesc" placeholder="e.g. I'm waiting for design assets before I can proceed…"></textarea>
+      </div>
+    </div>
+
+    <!-- SECTION 3 — 5 ACTIVITIES -->
+    <div class="section-card s3">
+      <div class="section-head">
+        <div class="section-num">3</div>
+        <div class="section-head-text">
+          <h2>Learning &amp; Course Effectiveness</h2>
+          <p>List up to 5 learning activities this month</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <!-- Activity 1 -->
+        <div class="activity-block">
+          <div class="activity-title">📚 Activity 1</div>
+          <div class="activity-row">
+            <div><label class="field-label">Course name or link</label><input class="act-input" type="text" id="c1name" placeholder="e.g. Google PM Certificate" /></div>
+            <div><label class="field-label">Completion status</label>
+              <div class="pill-group">
+                <input type="radio" class="pill-radio p-done"     name="c1s" id="c1s1" value="Completed"><label class="pill-lbl" for="c1s1">Completed</label>
+                <input type="radio" class="pill-radio p-progress" name="c1s" id="c1s2" value="In Progress"><label class="pill-lbl" for="c1s2">In Progress</label>
+                <input type="radio" class="pill-radio p-abandon"  name="c1s" id="c1s3" value="Abandoned"><label class="pill-lbl" for="c1s3">Abandoned</label>
+              </div>
+            </div>
+          </div>
+          <label class="field-label">"I've already applied a concept from this to my work"</label>
+          <div style="display:flex;align-items:center;">
+            <div class="score-group"><input type="radio" class="score-radio" name="sc1" id="sc1-1" value="1"><label class="score-lbl" for="sc1-1">1</label><input type="radio" class="score-radio" name="sc1" id="sc1-2" value="2"><label class="score-lbl" for="sc1-2">2</label><input type="radio" class="score-radio" name="sc1" id="sc1-3" value="3"><label class="score-lbl" for="sc1-3">3</label><input type="radio" class="score-radio" name="sc1" id="sc1-4" value="4"><label class="score-lbl" for="sc1-4">4</label><input type="radio" class="score-radio" name="sc1" id="sc1-5" value="5"><label class="score-lbl" for="sc1-5">5</label></div>
+            <span class="score-hint">1 = strongly disagree · 5 = strongly agree</span>
+          </div>
+        </div>
+        <!-- Activity 2 -->
+        <div class="activity-block">
+          <div class="activity-title">📚 Activity 2</div>
+          <div class="activity-row">
+            <div><label class="field-label">Course name or link</label><input class="act-input" type="text" id="c2name" placeholder="e.g. Advanced Excel workshop" /></div>
+            <div><label class="field-label">Completion status</label>
+              <div class="pill-group">
+                <input type="radio" class="pill-radio p-done"     name="c2s" id="c2s1" value="Completed"><label class="pill-lbl" for="c2s1">Completed</label>
+                <input type="radio" class="pill-radio p-progress" name="c2s" id="c2s2" value="In Progress"><label class="pill-lbl" for="c2s2">In Progress</label>
+                <input type="radio" class="pill-radio p-abandon"  name="c2s" id="c2s3" value="Abandoned"><label class="pill-lbl" for="c2s3">Abandoned</label>
+              </div>
+            </div>
+          </div>
+          <label class="field-label">Usefulness score</label>
+          <div style="display:flex;align-items:center;">
+            <div class="score-group"><input type="radio" class="score-radio" name="sc2" id="sc2-1" value="1"><label class="score-lbl" for="sc2-1">1</label><input type="radio" class="score-radio" name="sc2" id="sc2-2" value="2"><label class="score-lbl" for="sc2-2">2</label><input type="radio" class="score-radio" name="sc2" id="sc2-3" value="3"><label class="score-lbl" for="sc2-3">3</label><input type="radio" class="score-radio" name="sc2" id="sc2-4" value="4"><label class="score-lbl" for="sc2-4">4</label><input type="radio" class="score-radio" name="sc2" id="sc2-5" value="5"><label class="score-lbl" for="sc2-5">5</label></div>
+            <span class="score-hint">1 = strongly disagree · 5 = strongly agree</span>
+          </div>
+        </div>
+        <!-- Activity 3 -->
+        <div class="activity-block">
+          <div class="activity-title">📚 Activity 3 <span style="font-weight:400;font-size:11px;color:var(--gray)">(optional)</span></div>
+          <div class="activity-row">
+            <div><label class="field-label">Course name or link</label><input class="act-input" type="text" id="c3name" placeholder="e.g. Leadership workshop" /></div>
+            <div><label class="field-label">Completion status</label>
+              <div class="pill-group">
+                <input type="radio" class="pill-radio p-done"     name="c3s" id="c3s1" value="Completed"><label class="pill-lbl" for="c3s1">Completed</label>
+                <input type="radio" class="pill-radio p-progress" name="c3s" id="c3s2" value="In Progress"><label class="pill-lbl" for="c3s2">In Progress</label>
+                <input type="radio" class="pill-radio p-abandon"  name="c3s" id="c3s3" value="Abandoned"><label class="pill-lbl" for="c3s3">Abandoned</label>
+              </div>
+            </div>
+          </div>
+          <label class="field-label">Usefulness score</label>
+          <div style="display:flex;align-items:center;">
+            <div class="score-group"><input type="radio" class="score-radio" name="sc3" id="sc3-1" value="1"><label class="score-lbl" for="sc3-1">1</label><input type="radio" class="score-radio" name="sc3" id="sc3-2" value="2"><label class="score-lbl" for="sc3-2">2</label><input type="radio" class="score-radio" name="sc3" id="sc3-3" value="3"><label class="score-lbl" for="sc3-3">3</label><input type="radio" class="score-radio" name="sc3" id="sc3-4" value="4"><label class="score-lbl" for="sc3-4">4</label><input type="radio" class="score-radio" name="sc3" id="sc3-5" value="5"><label class="score-lbl" for="sc3-5">5</label></div>
+            <span class="score-hint">1 = strongly disagree · 5 = strongly agree</span>
+          </div>
+        </div>
+        <!-- Activity 4 -->
+        <div class="activity-block">
+          <div class="activity-title">📚 Activity 4 <span style="font-weight:400;font-size:11px;color:var(--gray)">(optional)</span></div>
+          <div class="activity-row">
+            <div><label class="field-label">Course name or link</label><input class="act-input" type="text" id="c4name" placeholder="e.g. Data analysis course" /></div>
+            <div><label class="field-label">Completion status</label>
+              <div class="pill-group">
+                <input type="radio" class="pill-radio p-done"     name="c4s" id="c4s1" value="Completed"><label class="pill-lbl" for="c4s1">Completed</label>
+                <input type="radio" class="pill-radio p-progress" name="c4s" id="c4s2" value="In Progress"><label class="pill-lbl" for="c4s2">In Progress</label>
+                <input type="radio" class="pill-radio p-abandon"  name="c4s" id="c4s3" value="Abandoned"><label class="pill-lbl" for="c4s3">Abandoned</label>
+              </div>
+            </div>
+          </div>
+          <label class="field-label">Usefulness score</label>
+          <div style="display:flex;align-items:center;">
+            <div class="score-group"><input type="radio" class="score-radio" name="sc4" id="sc4-1" value="1"><label class="score-lbl" for="sc4-1">1</label><input type="radio" class="score-radio" name="sc4" id="sc4-2" value="2"><label class="score-lbl" for="sc4-2">2</label><input type="radio" class="score-radio" name="sc4" id="sc4-3" value="3"><label class="score-lbl" for="sc4-3">3</label><input type="radio" class="score-radio" name="sc4" id="sc4-4" value="4"><label class="score-lbl" for="sc4-4">4</label><input type="radio" class="score-radio" name="sc4" id="sc4-5" value="5"><label class="score-lbl" for="sc4-5">5</label></div>
+            <span class="score-hint">1 = strongly disagree · 5 = strongly agree</span>
+          </div>
+        </div>
+        <!-- Activity 5 -->
+        <div class="activity-block">
+          <div class="activity-title">📚 Activity 5 <span style="font-weight:400;font-size:11px;color:var(--gray)">(optional)</span></div>
+          <div class="activity-row">
+            <div><label class="field-label">Course name or link</label><input class="act-input" type="text" id="c5name" placeholder="e.g. Communication skills book" /></div>
+            <div><label class="field-label">Completion status</label>
+              <div class="pill-group">
+                <input type="radio" class="pill-radio p-done"     name="c5s" id="c5s1" value="Completed"><label class="pill-lbl" for="c5s1">Completed</label>
+                <input type="radio" class="pill-radio p-progress" name="c5s" id="c5s2" value="In Progress"><label class="pill-lbl" for="c5s2">In Progress</label>
+                <input type="radio" class="pill-radio p-abandon"  name="c5s" id="c5s3" value="Abandoned"><label class="pill-lbl" for="c5s3">Abandoned</label>
+              </div>
+            </div>
+          </div>
+          <label class="field-label">Usefulness score</label>
+          <div style="display:flex;align-items:center;">
+            <div class="score-group"><input type="radio" class="score-radio" name="sc5" id="sc5-1" value="1"><label class="score-lbl" for="sc5-1">1</label><input type="radio" class="score-radio" name="sc5" id="sc5-2" value="2"><label class="score-lbl" for="sc5-2">2</label><input type="radio" class="score-radio" name="sc5" id="sc5-3" value="3"><label class="score-lbl" for="sc5-3">3</label><input type="radio" class="score-radio" name="sc5" id="sc5-4" value="4"><label class="score-lbl" for="sc5-4">4</label><input type="radio" class="score-radio" name="sc5" id="sc5-5" value="5"><label class="score-lbl" for="sc5-5">5</label></div>
+            <span class="score-hint">1 = strongly disagree · 5 = strongly agree</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 4 -->
+    <div class="section-card s4">
+      <div class="section-head">
+        <div class="section-num">4</div>
+        <div class="section-head-text">
+          <h2>The Single Most Valuable Question</h2>
+          <p>The most important section — take your time</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="mvq-block">
+          <label class="field-label">4a. What ONE thing, if improved next month, would make the biggest difference in your work?</label>
+          <textarea id="s4a" style="min-height:80px;" placeholder="Think about your current challenges and projects…"></textarea>
+        </div>
+        <div class="mvq-block">
+          <label class="field-label">4b. Share a micro-win — a moment this month where you applied something new or handled something better than before</label>
+          <textarea id="s4b" style="min-height:80px;" placeholder="Even small wins count — e.g. 'I used the new technique and saved 2 hours'…"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="submit-area">
+      <button class="btn-submit" id="submit-btn" onclick="submitForm()">Submit Check-in</button>
+      <p class="submit-hint" id="submit-hint">Response will be saved to the HR team's Google Sheet</p>
+    </div>
+  </div><!-- /form-content -->
+
+</div>
+</div><!-- /form-page -->
+
+<!-- ════════════ MANAGER PAGE ════════════ -->
+<div class="mgr-page" id="mgr-page">
+<div class="page">
+  <div class="mgr-header">
+    <div>
+      <h2>📊 HR Team Dashboard</h2>
+      <p>All employee responses — live data</p>
+    </div>
+    <button class="btn-topbar" onclick="goBack()">← Back</button>
+  </div>
+  <div class="kpi-row">
+    <div class="kpi-card k-all"><div class="kpi-num" id="kpi-total">0</div><div class="kpi-lbl">Total Responses</div></div>
+    <div class="kpi-card k-green"><div class="kpi-num" id="kpi-green">0</div><div class="kpi-lbl">✅ No Meeting</div></div>
+    <div class="kpi-card k-amber"><div class="kpi-num" id="kpi-amber">0</div><div class="kpi-lbl">📞 15-Min Call</div></div>
+    <div class="kpi-card k-red"><div class="kpi-num" id="kpi-red">0</div><div class="kpi-lbl">🗓 Full Meeting</div></div>
+  </div>
+  <div style="display:flex;gap:8px;margin-bottom:12px;">
+    <button class="btn-export" onclick="exportCSV()">⬇ Export CSV</button>
+    <button class="btn-export" onclick="clearAll()" style="color:var(--red);border-color:var(--red-l);">🗑 Clear All</button>
+  </div>
+  <div class="emp-list" id="emp-list"></div>
+</div>
+</div>
+
+<script>
+// ── CONFIG ──
+const WEBHOOK_KEY = 'pulse_webhook_url';
+const RESPONSES_KEY = 'pulse_responses';
+// Change this password to anything you want
+const MANAGER_PASSWORD = 'manager2026';
+
+// ── NAVIGATION ──
+function startForm() {
+  document.getElementById('intro-page').style.display = 'none';
+  document.getElementById('form-page').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function goBack() {
+  document.getElementById('mgr-page').style.display = 'none';
+  document.getElementById('intro-page').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── MANAGER ACCESS ──
+function openPwdModal() {
+  document.getElementById('pwd-modal').classList.add('show');
+  document.getElementById('pwd-input').value = '';
+  document.getElementById('pwd-error').style.display = 'none';
+  setTimeout(() => document.getElementById('pwd-input').focus(), 100);
+}
+
+function closePwdModal() {
+  document.getElementById('pwd-modal').classList.remove('show');
+}
+
+function checkPwd() {
+  const val = document.getElementById('pwd-input').value;
+  if (val === MANAGER_PASSWORD) {
+    closePwdModal();
+    openManagerDashboard();
+  } else {
+    document.getElementById('pwd-error').style.display = 'block';
+    document.getElementById('pwd-input').value = '';
+    document.getElementById('pwd-input').focus();
+  }
+}
+
+function openManagerDashboard() {
+  document.getElementById('intro-page').style.display = 'none';
+  document.getElementById('form-page').style.display = 'none';
+  document.getElementById('mgr-page').style.display = 'block';
+  renderDashboard();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── WEBHOOK ──
+function getWebhookUrl() { return localStorage.getItem(WEBHOOK_KEY) || ''; }
+
+function updateConnectionStatus() {
+  const url = getWebhookUrl();
+  const dot = document.getElementById('connection-dot');
+  const banner = document.getElementById('setup-banner');
+  if (url) {
+    dot.textContent = '🟢 Connected'; dot.style.color = '#4CAF50';
+    banner.className = 'setup-banner connected';
+    banner.innerHTML = '✅ <strong>Connected to Google Sheets.</strong> Responses go directly to your sheet.';
+  } else {
+    dot.textContent = '⚪ Not connected'; dot.style.color = '#aaa';
+  }
+}
+
+function openModal() { document.getElementById('setup-modal').classList.add('show'); const s = getWebhookUrl(); if(s) document.getElementById('webhook-url-input').value = s; }
+function closeModal() { document.getElementById('setup-modal').classList.remove('show'); }
+
+function saveWebhookUrl() {
+  const url = document.getElementById('webhook-url-input').value.trim();
+  if (!url || !url.startsWith('https://script.google.com')) { alert('Please paste a valid Google Apps Script URL.'); return; }
+  localStorage.setItem(WEBHOOK_KEY, url);
+  updateConnectionStatus();
+  closeModal();
+  alert('✅ Connected! Form now sends to your Google Sheet.');
+}
+
+function copyScript() {
+  navigator.clipboard.writeText(document.getElementById('apps-script-code').textContent).then(() => {
+    const b = document.querySelector('.copy-btn'); b.textContent = 'Copied!';
+    setTimeout(() => b.textContent = 'Copy', 2000);
+  });
+}
+
+// ── FORM LOGIC ──
+function decideAction() {
+  const statuses = [1,2,3,4,5].map(i => document.querySelector(`input[name="g${i}"]:checked`)?.value || '').filter(Boolean);
+  if (!statuses.length) return 'No Meeting';
+  if (statuses.some(s => s === 'No Progress')) return 'Full Meeting';
+  if (statuses.every(s => s === 'On Track' || s === 'No Longer Fits')) return 'No Meeting';
+  return '15-Min Call';
+}
+
+async function submitForm() {
+  const name = document.getElementById('emp-name').value.trim();
+  if (!name) { alert('Please enter your name before submitting.'); return; }
+  const webhookUrl = getWebhookUrl();
+  if (!webhookUrl) { if (!confirm('Not connected to Google Sheets.\nSubmit anyway (data will be lost)?')) return; }
+
+  const gv = n => document.querySelector(`input[name="g${n}"]:checked`)?.value || '';
+  const cv = n => document.querySelector(`input[name="c${n}s"]:checked`)?.value || '';
+  const sv = n => document.querySelector(`input[name="sc${n}"]:checked`)?.value || '';
+
+  const payload = {
+    name, month: document.getElementById('month-year').value.trim(),
+    g1name: document.getElementById('g1name').value.trim(), g1status: gv(1),
+    g2name: document.getElementById('g2name').value.trim(), g2status: gv(2),
+    g3name: document.getElementById('g3name').value.trim(), g3status: gv(3),
+    g4name: document.getElementById('g4name').value.trim(), g4status: gv(4),
+    g5name: document.getElementById('g5name').value.trim(), g5status: gv(5),
+    s1comment: document.getElementById('s1comment').value.trim(),
+    blocker: document.querySelector('input[name="blocker"]:checked')?.value || '',
+    blockerDesc: document.getElementById('blockerdesc').value.trim(),
+    c1name: document.getElementById('c1name').value.trim(), c1status: cv(1), c1score: sv(1),
+    c2name: document.getElementById('c2name').value.trim(), c2status: cv(2), c2score: sv(2),
+    c3name: document.getElementById('c3name').value.trim(), c3status: cv(3), c3score: sv(3),
+    c4name: document.getElementById('c4name').value.trim(), c4status: cv(4), c4score: sv(4),
+    c5name: document.getElementById('c5name').value.trim(), c5status: cv(5), c5score: sv(5),
+    s4a: document.getElementById('s4a').value.trim(),
+    s4b: document.getElementById('s4b').value.trim(),
+    action: decideAction(),
+  };
+
+  document.getElementById('sending-overlay').classList.add('show');
+  document.getElementById('submit-btn').disabled = true;
+
+  try {
+    if (webhookUrl) {
+      await fetch(webhookUrl, { method:'POST', mode:'no-cors',
+        headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload) });
+    }
+    // also save locally for manager dashboard
+    const responses = JSON.parse(localStorage.getItem(RESPONSES_KEY) || '[]');
+    responses.unshift({ ...payload, id: Date.now(), submittedAt: new Date().toLocaleString() });
+    localStorage.setItem(RESPONSES_KEY, JSON.stringify(responses));
+    showSuccess();
+  } catch(err) {
+    document.getElementById('sending-overlay').classList.remove('show');
+    document.getElementById('submit-btn').disabled = false;
+    alert('Error sending. Check your internet connection and try again.');
+  }
+}
+
+function showSuccess() {
+  document.getElementById('sending-overlay').classList.remove('show');
+  document.getElementById('form-content').style.display = 'none';
+  document.getElementById('success-screen').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function resetForm() {
+  document.querySelectorAll('input[type=text], textarea').forEach(el => el.value = '');
+  document.querySelectorAll('input[type=radio]').forEach(el => el.checked = false);
+  document.getElementById('form-content').style.display = 'block';
+  document.getElementById('success-screen').style.display = 'none';
+  document.getElementById('submit-btn').disabled = false;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── DASHBOARD ──
+function renderDashboard() {
+  const responses = JSON.parse(localStorage.getItem(RESPONSES_KEY) || '[]');
+  document.getElementById('kpi-total').textContent = responses.length;
+  document.getElementById('kpi-green').textContent = responses.filter(r => r.action === 'No Meeting').length;
+  document.getElementById('kpi-amber').textContent = responses.filter(r => r.action === '15-Min Call').length;
+  document.getElementById('kpi-red').textContent   = responses.filter(r => r.action === 'Full Meeting').length;
+  const list = document.getElementById('emp-list');
+  if (!responses.length) {
+    list.innerHTML = '<div class="empty-state"><div style="font-size:40px">📭</div><p style="margin-top:8px">No responses yet.</p></div>';
+    return;
+  }
+  list.innerHTML = responses.map((r, idx) => empCardHTML(r, idx)).join('');
+}
+
+function empCardHTML(r, idx) {
+  const badge = r.action === 'No Meeting' ? `<span class="action-badge badge-green">✅ No Meeting</span>` :
+                r.action === '15-Min Call' ? `<span class="action-badge badge-amber">📞 15-Min Call</span>` :
+                                             `<span class="action-badge badge-red">🗓 Full Meeting</span>`;
+  const statusMap = { 'On Track': 'gp-green', 'Slow': 'gp-amber', 'No Progress': 'gp-red', 'No Longer Fits': 'gp-gray' };
+  const iconMap   = { 'On Track': '✅', 'Slow': '🟡', 'No Progress': '🔴', 'No Longer Fits': '⬜' };
+  const goals = [1,2,3,4,5].map(i => ({ name: r[`g${i}name`], status: r[`g${i}status`] }))
+    .filter(g => g.name || g.status)
+    .map(g => `<span class="goal-pill ${statusMap[g.status]||'gp-gray'}">${iconMap[g.status]||''} ${g.name||'—'}</span>`).join('');
+  const courses = [1,2,3,4,5].map(i => r[`c${i}name`] ? `<div class="detail-row"><span class="lbl">${r[`c${i}name`]}</span><span class="val">${r[`c${i}status`]||'—'}${r[`c${i}score`] ? ' · Score '+r[`c${i}score`]+'/5':''}</span></div>` : '').join('');
+  return `<div class="emp-card">
+    <div class="emp-card-head" onclick="toggleCard(${idx})">
+      <div><div class="emp-name">${r.name}</div><div class="emp-month">${r.month||'—'} · ${r.submittedAt}</div></div>
+      ${badge}
+    </div>
+    <div class="emp-card-body" id="cb-${idx}">
+      ${goals ? `<div class="detail-section"><h4>Goals</h4><div class="goals-pills">${goals}</div></div>` : ''}
+      ${r.blocker ? `<div class="detail-section"><h4>Blocker</h4><div class="detail-row"><span class="lbl">Type</span><span class="val">${r.blocker}</span></div>${r.blockerDesc?`<div class="text-preview">${r.blockerDesc}</div>`:''}</div>` : ''}
+      ${courses ? `<div class="detail-section"><h4>Learning</h4>${courses}</div>` : ''}
+      ${r.s4a ? `<div class="detail-section"><h4>Key Development Need</h4><div class="text-preview">${r.s4a}</div></div>` : ''}
+      ${r.s4b ? `<div class="detail-section"><h4>Micro-Win</h4><div class="text-preview">${r.s4b}</div></div>` : ''}
+      <div style="margin-top:10px;text-align:right">
+        <button onclick="deleteResp(${r.id})" style="background:none;border:none;color:var(--red);font-size:12px;cursor:pointer;font-family:inherit">🗑 Delete this response</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function toggleCard(idx) { document.getElementById('cb-'+idx).classList.toggle('open'); }
+
+function deleteResp(id) {
+  if (!confirm('Delete this response?')) return;
+  const arr = JSON.parse(localStorage.getItem(RESPONSES_KEY) || '[]').filter(r => r.id !== id);
+  localStorage.setItem(RESPONSES_KEY, JSON.stringify(arr));
+  renderDashboard();
+}
+
+function clearAll() {
+  if (!confirm('Delete ALL responses? This cannot be undone.')) return;
+  localStorage.removeItem(RESPONSES_KEY);
+  renderDashboard();
+}
+
+function exportCSV() {
+  const responses = JSON.parse(localStorage.getItem(RESPONSES_KEY) || '[]');
+  if (!responses.length) { alert('No responses to export.'); return; }
+  const hdrs = ['Name','Month','Submitted','G1','G1S','G2','G2S','G3','G3S','G4','G4S','G5','G5S','Comment','Blocker','Blocker Desc','C1','C1S','C1Score','C2','C2S','C2Score','C3','C3S','C3Score','C4','C4S','C4Score','C5','C5S','C5Score','Key Dev','Micro-Win','Action'];
+  const rows = responses.map(r => [
+    r.name, r.month, r.submittedAt,
+    r.g1name,r.g1status, r.g2name,r.g2status, r.g3name,r.g3status, r.g4name,r.g4status, r.g5name,r.g5status,
+    r.s1comment, r.blocker, r.blockerDesc,
+    r.c1name,r.c1status,r.c1score, r.c2name,r.c2status,r.c2score,
+    r.c3name,r.c3status,r.c3score, r.c4name,r.c4status,r.c4score, r.c5name,r.c5status,r.c5score,
+    r.s4a, r.s4b, r.action
+  ].map(v => `"${String(v||'').replace(/"/g,'""')}"`));
+  const csv = [hdrs.map(h=>`"${h}"`).join(','), ...rows.map(r=>r.join(','))].join('\n');
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,\uFEFF' + encodeURIComponent(csv);
+  a.download = `pulse_check_${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+}
+
+// ── INIT ──
+updateConnectionStatus();
+document.getElementById('setup-modal').addEventListener('click', e => { if (e.target === document.getElementById('setup-modal')) closeModal(); });
+document.getElementById('pwd-modal').addEventListener('click', e => { if (e.target === document.getElementById('pwd-modal')) closePwdModal(); });
+</script>
+</body>
+</html>
