@@ -120,9 +120,10 @@ body { font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
 .hero p { font-size: 13px; color: var(--gray); line-height: 1.7; }
 .hero-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 1.25rem; }
 .hero-fields label { font-size: 12px; font-weight: 600; color: var(--navy); display: block; margin-bottom: 5px; }
-.hero-fields input { width: 100%; padding: 9px 12px; border: 1.5px solid var(--border);
-  border-radius: 8px; font-size: 14px; font-family: inherit; background: var(--gray-l); }
-.hero-fields input:focus { outline: none; border-color: var(--blue); background: #fff; }
+.hero-fields input, .hero-fields select { width: 100%; padding: 9px 12px; border: 1.5px solid var(--border);
+  border-radius: 8px; font-size: 14px; font-family: inherit; background: var(--gray-l); appearance: none; -webkit-appearance: none; }
+.hero-fields input:focus, .hero-fields select:focus { outline: none; border-color: var(--blue); background: #fff; }
+.hero-fields select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; padding-right: 28px; cursor: pointer; }
 
 .section-card { background: #fff; border-radius: 14px; border: 1px solid var(--border);
   box-shadow: var(--shadow); margin-bottom: 1.25rem; overflow: hidden; }
@@ -144,7 +145,7 @@ body { font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
   padding: 10px 14px; font-size: 13px; color: #7A5C00; margin-bottom: 1rem; }
 
 /* GOALS */
-.goal-headers { direction: ltr; display: grid; grid-template-columns: 1fr 72px 72px 85px 96px;
+.goal-headers { direction: ltr; display: grid; grid-template-columns: 28px 1fr 72px 72px 85px 96px;
   gap: 5px; margin-bottom: 4px; }
 .goal-headers span { font-size: 10px; font-weight: 700; text-align: center;
   padding: 4px 2px; border-radius: 5px; letter-spacing: 0.03em; }
@@ -153,7 +154,7 @@ body { font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
 .gh-noprog { background: var(--red-l);   color: var(--red); }
 .gh-nofit  { background: #E8E8E8; color: #555; }
 
-.goal-row { direction: ltr; display: grid; grid-template-columns: 1fr 72px 72px 85px 96px;
+.goal-row { direction: ltr; display: grid; grid-template-columns: 28px 1fr 72px 72px 85px 96px;
   gap: 5px; align-items: center; padding: 7px 0; border-bottom: 1px solid #F0F0F0; }
 .goal-row:last-of-type { border-bottom: none; }
 .goal-name-input { border: 1.5px solid var(--border); border-radius: 7px; padding: 7px 10px;
@@ -311,10 +312,18 @@ textarea:focus { outline: none; border-color: var(--blue); background: #fff; }
   border-radius: 8px; padding: 8px 18px; font-size: 13px; font-weight: 500;
   cursor: pointer; font-family: inherit; }
 .btn-export:hover { background: var(--gray-l); }
+.filter-bar { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px; }
+.filter-bar input { background:#fff; border:1.5px solid var(--border); border-radius:8px; padding:8px 12px; font-size:13px; font-family:inherit; color:var(--navy); outline:none; }
+.filter-bar input:focus { border-color:var(--navy); }
+.field-error { border-color: var(--red) !important; box-shadow: 0 0 0 3px rgba(220,53,69,0.15) !important; }
+.add-item-btn { background:none; border:1.5px dashed var(--navy); color:var(--navy); border-radius:8px; padding:8px 18px; font-size:13px; font-weight:600; cursor:pointer; font-family:inherit; margin-top:10px; width:100%; opacity:0.7; }
+.add-item-btn:hover { opacity:1; background:var(--gray-l); }
+.remove-item-btn { background:var(--red-l); border:1.5px solid var(--red); color:var(--red); font-size:14px; cursor:pointer; padding:4px 6px; border-radius:6px; line-height:1; font-family:inherit; display:flex; align-items:center; justify-content:center; }
+.remove-item-btn:hover { background:var(--red); color:#fff; }
 
 @media (max-width:600px) {
   .intro-sections { grid-template-columns: 1fr; }
-  .goal-headers, .goal-row { grid-template-columns: 1fr 58px 58px 68px 78px; }
+  .goal-headers, .goal-row { grid-template-columns: 28px 1fr 58px 58px 68px 78px; }
   .blocker-grid { grid-template-columns: 1fr 1fr; }
   .activity-row { grid-template-columns: 1fr; }
   .hero-fields { grid-template-columns: 1fr; }
@@ -334,8 +343,8 @@ textarea:focus { outline: none; border-color: var(--blue); background: #fff; }
 <div class="modal-overlay" id="pwd-modal">
   <div class="pwd-modal">
     <div style="font-size:36px;margin-bottom:10px;">🔒</div>
-    <h2 data-i18n="mgrModalTitle">دخول مسؤولة التطوير حبيبة حجازي</h2>
-    <p data-i18n="mgrModalP">أدخل كلمة مرور مسؤولة التطوير حبيبة حجازي لعرض كل الاستجابات</p>
+    <h2 data-i18n="mgrModalTitle">دخول مسؤولة التطوير</h2>
+    <p data-i18n="mgrModalP">أدخل كلمة مرور مسؤولة التطوير لعرض كل الاستجابات</p>
     <input class="pwd-input" type="password" id="pwd-input" placeholder="••••••••" onkeydown="if(event.key==='Enter')checkPwd()" />
     <div class="pwd-error" id="pwd-error" data-i18n="pwdError">كلمة المرور غير صحيحة، حاول مرة أخرى.</div>
     <button class="btn-pwd" onclick="checkPwd()" data-i18n="mgrModalBtn">دخول اللوحة</button>
@@ -351,7 +360,7 @@ textarea:focus { outline: none; border-color: var(--blue); background: #fff; }
   <div class="topbar-right">
     <span id="connection-dot" style="font-size:12px;color:#4CAF50;" data-i18n="connectedDot">🟢 متصل</span>
     <button class="btn-lang" id="lang-btn" onclick="toggleLang()">English</button>
-    <button class="btn-topbar" onclick="openPwdModal()" id="mgr-btn" data-i18n="mgrBtn">📊 لوحة مسؤولة التطوير حبيبة حجازي</button>
+    <button class="btn-topbar" onclick="openPwdModal()" id="mgr-btn" data-i18n="mgrBtn">📊 لوحة مسؤولة التطوير</button>
   </div>
 </div>
 
@@ -365,7 +374,7 @@ textarea:focus { outline: none; border-color: var(--blue); background: #fff; }
     <p data-i18n="introP">هذا التقييم الشهري يحل محل الاجتماع التقليدي. إجاباتك الصادقة ستساعدني في ضبط خطتك التطويرية وتقديم الدعم المناسب لك — دون اجتماعات غير ضرورية.</p>
     <div class="intro-meta">
       <span class="intro-tag" data-i18n="tag1">⏱ يستغرق أقل من 10 دقائق</span>
-      <span class="intro-tag" data-i18n="tag2">🔒 إجاباتك يراها مسؤولة التطوير حبيبة حجازي فقط</span>
+      <span class="intro-tag" data-i18n="tag2">🔒 إجاباتك يراها مسؤولة التطوير فقط</span>
       <span class="intro-tag" data-i18n="tag3">📊 4 أقسام</span>
     </div>
   </div>
@@ -461,7 +470,7 @@ textarea:focus { outline: none; border-color: var(--blue); background: #fff; }
       <div class="rule-icon">🔒</div>
       <div class="rule-text">
         <strong data-i18n="rule4Strong">إجاباتك سرية تمامًا</strong>
-        <span data-i18n="rule4Span">مسؤولة التطوير حبيبة حجازي فقط تستطيع رؤية إجاباتك. لا يمكن لأي زميل آخر الاطلاع على ما كتبته.</span>
+        <span data-i18n="rule4Span">مسؤولة التطوير فقط تستطيع رؤية إجاباتك. لا يمكن لأي زميل آخر الاطلاع على ما كتبته.</span>
       </div>
     </div>
   </div>
@@ -490,10 +499,29 @@ textarea:focus { outline: none; border-color: var(--blue); background: #fff; }
     <div class="hero">
       <div class="hero-eyebrow" data-i18n="heroEyebrow">التقييم الشهري</div>
       <h2 data-i18n="heroH2">التقييم التطويري الشهري</h2>
-      <p data-i18n="heroP">يرجى تعبئة الأقسام الأربعة بالأسفل. إجاباتك تذهب مباشرة إلى مسؤولة التطوير حبيبة حجازي ولا يمكن لأي زميل آخر رؤيتها.</p>
+      <p data-i18n="heroP">يرجى تعبئة الأقسام الأربعة بالأسفل. إجاباتك تذهب مباشرة إلى مسؤولة التطوير ولا يمكن لأي زميل آخر رؤيتها.</p>
       <div class="hero-fields">
         <div><label data-i18n="empNameLabel">اسم الموظف</label><input type="text" id="emp-name" data-i18n-ph="empNamePh" placeholder="اسمك بالكامل" /></div>
-        <div><label data-i18n="monthLabel">الشهر / السنة</label><input type="text" id="month-year" data-i18n-ph="monthPh" placeholder="مثال: يونيو 2026" /></div>
+        <div><label data-i18n="monthLabel">الشهر / السنة</label><span style="display:flex;gap:8px;">
+          <select id="month-sel">
+            <option value="" data-i18n="monthPh">الشهر</option>
+            <option value="01" data-i18n="m01">January</option>
+            <option value="02" data-i18n="m02">February</option>
+            <option value="03" data-i18n="m03">March</option>
+            <option value="04" data-i18n="m04">April</option>
+            <option value="05" data-i18n="m05">May</option>
+            <option value="06" data-i18n="m06">June</option>
+            <option value="07" data-i18n="m07">July</option>
+            <option value="08" data-i18n="m08">August</option>
+            <option value="09" data-i18n="m09">September</option>
+            <option value="10" data-i18n="m10">October</option>
+            <option value="11" data-i18n="m11">November</option>
+            <option value="12" data-i18n="m12">December</option>
+          </select>
+          <select id="year-sel">
+            <option value="" data-i18n="yearPh">السنة</option>
+          </select>
+        </span></div>
       </div>
     </div>
 
@@ -509,48 +537,54 @@ textarea:focus { outline: none; border-color: var(--blue); background: #fff; }
       <div class="section-body">
         <div class="note-box" data-i18n="s1Note">💡 الأهداف مأخوذة من خطتك التطويرية المرسلة في آخر بريد إلكتروني</div>
         <div class="goal-headers">
-          <span></span>
+          <span></span><span></span>
           <span class="gh-track" data-i18n="ghTrack">✅ على المسار</span>
           <span class="gh-slow" data-i18n="ghSlow">🟡 بطيء</span>
           <span class="gh-noprog" data-i18n="ghNoprog">🔴 بلا تقدم</span>
           <span class="gh-nofit" data-i18n="ghNofit">⬜ غير مناسب</span>
         </div>
-        <!-- 5 goal rows -->
-        <div class="goal-row">
+        <!-- 5 goal rows — only first visible by default -->
+        <div class="goal-row" id="goal-row-1">
+          <span></span>
           <input class="goal-name-input" type="text" id="g1name" data-i18n-ph="g1Ph" placeholder="الهدف 1" />
           <div><input type="radio" class="status-radio r-green" name="g1" id="g1g" value="On Track"><label class="status-lbl status-lbl-green" for="g1g">✅</label></div>
           <div><input type="radio" class="status-radio r-amber" name="g1" id="g1a" value="Slow"><label class="status-lbl status-lbl-amber" for="g1a">🟡</label></div>
           <div><input type="radio" class="status-radio r-red"   name="g1" id="g1r" value="No Progress"><label class="status-lbl status-lbl-red" for="g1r">🔴</label></div>
           <div><input type="radio" class="status-radio r-gray"  name="g1" id="g1x" value="No Longer Fits"><label class="status-lbl status-lbl-gray" for="g1x">⬜</label></div>
         </div>
-        <div class="goal-row">
+        <div class="goal-row" id="goal-row-2" style="display:none">
+          <button type="button" class="remove-item-btn" onclick="removeGoal(2)"><img src="delete.svg" width="16" height="16" alt="delete" style="display:block"></button>
           <input class="goal-name-input" type="text" id="g2name" data-i18n-ph="g2Ph" placeholder="الهدف 2" />
           <div><input type="radio" class="status-radio r-green" name="g2" id="g2g" value="On Track"><label class="status-lbl status-lbl-green" for="g2g">✅</label></div>
           <div><input type="radio" class="status-radio r-amber" name="g2" id="g2a" value="Slow"><label class="status-lbl status-lbl-amber" for="g2a">🟡</label></div>
           <div><input type="radio" class="status-radio r-red"   name="g2" id="g2r" value="No Progress"><label class="status-lbl status-lbl-red" for="g2r">🔴</label></div>
           <div><input type="radio" class="status-radio r-gray"  name="g2" id="g2x" value="No Longer Fits"><label class="status-lbl status-lbl-gray" for="g2x">⬜</label></div>
         </div>
-        <div class="goal-row">
-          <input class="goal-name-input" type="text" id="g3name" data-i18n-ph="g3Ph" placeholder="الهدف 3 (اختياري)" />
+        <div class="goal-row" id="goal-row-3" style="display:none">
+          <button type="button" class="remove-item-btn" onclick="removeGoal(3)"><img src="delete.svg" width="16" height="16" alt="delete" style="display:block"></button>
+          <input class="goal-name-input" type="text" id="g3name" data-i18n-ph="g3Ph" placeholder="الهدف 3" />
           <div><input type="radio" class="status-radio r-green" name="g3" id="g3g" value="On Track"><label class="status-lbl status-lbl-green" for="g3g">✅</label></div>
           <div><input type="radio" class="status-radio r-amber" name="g3" id="g3a" value="Slow"><label class="status-lbl status-lbl-amber" for="g3a">🟡</label></div>
           <div><input type="radio" class="status-radio r-red"   name="g3" id="g3r" value="No Progress"><label class="status-lbl status-lbl-red" for="g3r">🔴</label></div>
           <div><input type="radio" class="status-radio r-gray"  name="g3" id="g3x" value="No Longer Fits"><label class="status-lbl status-lbl-gray" for="g3x">⬜</label></div>
         </div>
-        <div class="goal-row">
-          <input class="goal-name-input" type="text" id="g4name" data-i18n-ph="g4Ph" placeholder="الهدف 4 (اختياري)" />
+        <div class="goal-row" id="goal-row-4" style="display:none">
+          <button type="button" class="remove-item-btn" onclick="removeGoal(4)"><img src="delete.svg" width="16" height="16" alt="delete" style="display:block"></button>
+          <input class="goal-name-input" type="text" id="g4name" data-i18n-ph="g4Ph" placeholder="الهدف 4" />
           <div><input type="radio" class="status-radio r-green" name="g4" id="g4g" value="On Track"><label class="status-lbl status-lbl-green" for="g4g">✅</label></div>
           <div><input type="radio" class="status-radio r-amber" name="g4" id="g4a" value="Slow"><label class="status-lbl status-lbl-amber" for="g4a">🟡</label></div>
           <div><input type="radio" class="status-radio r-red"   name="g4" id="g4r" value="No Progress"><label class="status-lbl status-lbl-red" for="g4r">🔴</label></div>
           <div><input type="radio" class="status-radio r-gray"  name="g4" id="g4x" value="No Longer Fits"><label class="status-lbl status-lbl-gray" for="g4x">⬜</label></div>
         </div>
-        <div class="goal-row">
-          <input class="goal-name-input" type="text" id="g5name" data-i18n-ph="g5Ph" placeholder="الهدف 5 (اختياري)" />
+        <div class="goal-row" id="goal-row-5" style="display:none">
+          <button type="button" class="remove-item-btn" onclick="removeGoal(5)"><img src="delete.svg" width="16" height="16" alt="delete" style="display:block"></button>
+          <input class="goal-name-input" type="text" id="g5name" data-i18n-ph="g5Ph" placeholder="الهدف 5" />
           <div><input type="radio" class="status-radio r-green" name="g5" id="g5g" value="On Track"><label class="status-lbl status-lbl-green" for="g5g">✅</label></div>
           <div><input type="radio" class="status-radio r-amber" name="g5" id="g5a" value="Slow"><label class="status-lbl status-lbl-amber" for="g5a">🟡</label></div>
           <div><input type="radio" class="status-radio r-red"   name="g5" id="g5r" value="No Progress"><label class="status-lbl status-lbl-red" for="g5r">🔴</label></div>
           <div><input type="radio" class="status-radio r-gray"  name="g5" id="g5x" value="No Longer Fits"><label class="status-lbl status-lbl-gray" for="g5x">⬜</label></div>
         </div>
+        <button type="button" class="add-item-btn" id="add-goal-btn" onclick="addGoal()" data-i18n="addGoalBtn">+ Add another goal</button>
         <div style="margin-top:1rem">
           <label class="field-label" data-i18n="s1CommentLabel">ملاحظات إضافية (اختياري)</label>
           <textarea id="s1comment" data-i18n-ph="s1CommentPh" placeholder="أي توضيح إضافي عن أهدافك…"></textarea>
@@ -613,8 +647,9 @@ textarea:focus { outline: none; border-color: var(--blue); background: #fff; }
           </div>
         </div>
         <!-- Activity 2 -->
-        <div class="activity-block">
-          <div class="activity-title" data-i18n="act2Title">📚 النشاط 2</div>
+        <div class="activity-block" id="act-block-2" style="display:none">
+          <div class="activity-title" style="display:flex;justify-content:space-between;align-items:center"><span data-i18n="act2Title">📚 النشاط 2</span><button type="button" class="remove-item-btn" onclick="removeActivity(2)"><img src="delete.svg" width="16" height="16" alt="delete" style="display:block"></button>
+/button></div>
           <div class="activity-row">
             <div><label class="field-label" data-i18n="courseNameLabel">اسم الدورة أو رابطها</label><input class="act-input" type="text" id="c2name" data-i18n-ph="c2Ph" placeholder="مثال: ورشة إكسل المتقدم" /></div>
             <div><label class="field-label" data-i18n="courseStatusLabel">حالة الإنجاز</label>
@@ -632,8 +667,9 @@ textarea:focus { outline: none; border-color: var(--blue); background: #fff; }
           </div>
         </div>
         <!-- Activity 3 -->
-        <div class="activity-block">
-          <div class="activity-title"><span data-i18n="act3Title">📚 النشاط 3</span> <span style="font-weight:400;font-size:11px;color:var(--gray)" data-i18n="optionalTag">(اختياري)</span></div>
+        <div class="activity-block" id="act-block-3" style="display:none">
+          <div class="activity-title" style="display:flex;justify-content:space-between;align-items:center"><span data-i18n="act3Title">📚 النشاط 3</span><button type="button" class="remove-item-btn" onclick="removeActivity(3)"><img src="delete.svg" width="16" height="16" alt="delete" style="display:block"></button>
+/button></div>
           <div class="activity-row">
             <div><label class="field-label" data-i18n="courseNameLabel">اسم الدورة أو رابطها</label><input class="act-input" type="text" id="c3name" data-i18n-ph="c3Ph" placeholder="مثال: ورشة القيادة" /></div>
             <div><label class="field-label" data-i18n="courseStatusLabel">حالة الإنجاز</label>
@@ -651,8 +687,9 @@ textarea:focus { outline: none; border-color: var(--blue); background: #fff; }
           </div>
         </div>
         <!-- Activity 4 -->
-        <div class="activity-block">
-          <div class="activity-title"><span data-i18n="act4Title">📚 النشاط 4</span> <span style="font-weight:400;font-size:11px;color:var(--gray)" data-i18n="optionalTag">(اختياري)</span></div>
+        <div class="activity-block" id="act-block-4" style="display:none">
+          <div class="activity-title" style="display:flex;justify-content:space-between;align-items:center"><span data-i18n="act4Title">📚 النشاط 4</span><button type="button" class="remove-item-btn" onclick="removeActivity(4)"><img src="delete.svg" width="16" height="16" alt="delete" style="display:block"></button>
+/button></div>
           <div class="activity-row">
             <div><label class="field-label" data-i18n="courseNameLabel">اسم الدورة أو رابطها</label><input class="act-input" type="text" id="c4name" data-i18n-ph="c4Ph" placeholder="مثال: دورة تحليل البيانات" /></div>
             <div><label class="field-label" data-i18n="courseStatusLabel">حالة الإنجاز</label>
@@ -670,8 +707,9 @@ textarea:focus { outline: none; border-color: var(--blue); background: #fff; }
           </div>
         </div>
         <!-- Activity 5 -->
-        <div class="activity-block">
-          <div class="activity-title"><span data-i18n="act5Title">📚 النشاط 5</span> <span style="font-weight:400;font-size:11px;color:var(--gray)" data-i18n="optionalTag">(اختياري)</span></div>
+        <div class="activity-block" id="act-block-5" style="display:none">
+          <div class="activity-title" style="display:flex;justify-content:space-between;align-items:center"><span data-i18n="act5Title">📚 النشاط 5</span><button type="button" class="remove-item-btn" onclick="removeActivity(5)"><img src="delete.svg" width="16" height="16" alt="delete" style="display:block"></button>
+/button></div>
           <div class="activity-row">
             <div><label class="field-label" data-i18n="courseNameLabel">اسم الدورة أو رابطها</label><input class="act-input" type="text" id="c5name" data-i18n-ph="c5Ph" placeholder="مثال: كتاب عن مهارات التواصل" /></div>
             <div><label class="field-label" data-i18n="courseStatusLabel">حالة الإنجاز</label>
@@ -688,6 +726,7 @@ textarea:focus { outline: none; border-color: var(--blue); background: #fff; }
             <span class="score-hint" data-i18n="scoreHint">1 = غير موافق تمامًا · 5 = موافق تمامًا</span>
           </div>
         </div>
+        <button type="button" class="add-item-btn" id="add-act-btn" onclick="addActivity()" data-i18n="addActBtn">+ Add another activity</button>
       </div>
     </div>
 
@@ -714,7 +753,7 @@ textarea:focus { outline: none; border-color: var(--blue); background: #fff; }
 
     <div class="submit-area">
       <button class="btn-submit" id="submit-btn" onclick="submitForm()" data-i18n="submitBtn">إرسال التقييم</button>
-      <p class="submit-hint" id="submit-hint" data-i18n="submitHint">سيتم حفظ إجابتك في ملف جوجل شيت الخاص بـمسؤولة التطوير حبيبة حجازي</p>
+      <p class="submit-hint" id="submit-hint" data-i18n="submitHint">سيتم حفظ إجابتك في ملف جوجل شيت الخاص بمسؤولة التطوير</p>
     </div>
   </div><!-- /form-content -->
 
@@ -726,7 +765,7 @@ textarea:focus { outline: none; border-color: var(--blue); background: #fff; }
 <div class="page">
   <div class="mgr-header">
     <div>
-      <h2 data-i18n="mgrH2">📊 لوحة مسؤولة التطوير حبيبة حجازي</h2>
+      <h2 data-i18n="mgrH2">📊 لوحة مسؤولة التطوير</h2>
       <p data-i18n="mgrSub">كل إجابات الموظفين — بيانات مباشرة</p>
     </div>
     <button class="btn-topbar" onclick="goBack()" data-i18n="mgrBack">← رجوع</button>
@@ -736,6 +775,12 @@ textarea:focus { outline: none; border-color: var(--blue); background: #fff; }
     <div class="kpi-card k-green"><div class="kpi-num" id="kpi-green">0</div><div class="kpi-lbl" data-i18n="kpiGreen">✅ بدون اجتماع</div></div>
     <div class="kpi-card k-amber"><div class="kpi-num" id="kpi-amber">0</div><div class="kpi-lbl" data-i18n="kpiAmber">📞 مكالمة 15 دقيقة</div></div>
     <div class="kpi-card k-red"><div class="kpi-num" id="kpi-red">0</div><div class="kpi-lbl" data-i18n="kpiRed">🗓 اجتماع كامل</div></div>
+  </div>
+  <div class="filter-bar">
+    <input type="text" id="filter-name" data-i18n-ph="filterNamePh" placeholder="Search by name…" oninput="renderDashboard()" style="flex:1;min-width:140px;">
+    <input type="date" id="filter-date-from" onchange="renderDashboard()" title="From">
+    <input type="date" id="filter-date-to" onchange="renderDashboard()" title="To">
+    <button class="btn-export" onclick="clearFilters()" data-i18n="clearFilters">✕ Clear</button>
   </div>
   <div style="display:flex;gap:8px;margin-bottom:12px;">
     <button class="btn-export" onclick="exportCSV()" data-i18n="exportCSV">⬇ تصدير CSV</button>
@@ -757,13 +802,13 @@ const T = {
     pageTitle: 'التقييم التطويري الشهري',
     topbarTitle: 'التقييم التطويري الشهري',
     connectedDot: '🟢 متصل',
-    mgrBtn: '📊 لوحة مسؤولة التطوير حبيبة حجازي',
+    mgrBtn: '📊 لوحة مسؤولة التطوير',
     langBtn: 'English',
     bannerConnected: '✅ <strong>تم الربط مع جوجل شيت.</strong> الإجابات تُحفظ مباشرة في ملفك.',
     introH1: 'التقييم التطويري<br>الشهري',
     introP: 'هذا التقييم الشهري يحل محل الاجتماع التقليدي. إجاباتك الصادقة ستساعدني في ضبط خطتك التطويرية وتقديم الدعم المناسب لك — دون اجتماعات غير ضرورية.',
     tag1: '⏱ يستغرق أقل من 10 دقائق',
-    tag2: '🔒 إجاباتك يراها مسؤولة التطوير حبيبة حجازي فقط',
+    tag2: '🔒 إجاباتك يراها مسؤولة التطوير فقط',
     tag3: '📊 4 أقسام',
     ic1Title: 'متابعة التقدم في الأهداف',
     ic1P: 'قيّم كل هدف من أهدافك التطويرية باستخدام الأزرار الملونة. يمكنك إضافة حتى <strong>5 أهداف</strong>.',
@@ -797,12 +842,14 @@ const T = {
     rule3Strong: 'أي هدف بلا تقدم ← اجتماع كامل',
     rule3Span: 'سأحدد جلسة مخصصة لفهم الموقف ومساعدتك.',
     rule4Strong: 'إجاباتك سرية تمامًا',
-    rule4Span: 'مسؤولة التطوير حبيبة حجازي فقط تستطيع رؤية إجاباتك. لا يمكن لأي زميل آخر الاطلاع على ما كتبته.',
+    rule4Span: 'مسؤولة التطوير فقط تستطيع رؤية إجاباتك. لا يمكن لأي زميل آخر الاطلاع على ما كتبته.',
     startBtn: 'ابدأ تقييمي الآن ←', startHint: 'ستتمكن من مراجعة كل إجاباتك قبل الإرسال',
     heroEyebrow: 'التقييم الشهري', heroH2: 'التقييم التطويري الشهري',
-    heroP: 'يرجى تعبئة الأقسام الأربعة بالأسفل. إجاباتك تذهب مباشرة إلى مسؤولة التطوير حبيبة حجازي ولا يمكن لأي زميل آخر رؤيتها.',
+    heroP: 'يرجى تعبئة الأقسام الأربعة بالأسفل. إجاباتك تذهب مباشرة إلى مسؤولة التطوير ولا يمكن لأي زميل آخر رؤيتها.',
     empNameLabel: 'اسم الموظف', empNamePh: 'اسمك بالكامل',
-    monthLabel: 'الشهر / السنة', monthPh: 'مثال: يونيو 2026',
+    monthLabel: 'الشهر / السنة', monthPh: 'الشهر', yearPh: 'السنة',
+    m01:'يناير',m02:'فبراير',m03:'مارس',m04:'أبريل',m05:'مايو',m06:'يونيو',
+    m07:'يوليو',m08:'أغسطس',m09:'سبتمبر',m10:'أكتوبر',m11:'نوفمبر',m12:'ديسمبر',
     s1Title: 'مستوى تقدمك في الأهداف', s1Sub: 'قيّم كل هدف من خطتك التطويرية — حتى 5 أهداف',
     s1Note: '💡 الأهداف مأخوذة من خطتك التطويرية المرسلة في آخر بريد إلكتروني',
     ghTrack: '✅ على المسار', ghSlow: '🟡 بطيء', ghNoprog: '🔴 بلا تقدم', ghNofit: '⬜ غير مناسب',
@@ -826,16 +873,27 @@ const T = {
     s4aPh: 'فكّر في تحدياتك ومشاريعك الحالية…',
     s4bLabel: '4ب. شارك إنجازًا صغيرًا — لحظة هذا الشهر طبّقت فيها شيئًا جديدًا أو تعاملت مع موقف بشكل أفضل من قبل',
     s4bPh: "كل إنجاز له قيمة — مثال: 'استخدمت طريقة جديدة وفّرت عليّ ساعتين من العمل'…",
-    submitBtn: 'إرسال التقييم', submitHint: 'سيتم حفظ إجابتك في ملف جوجل شيت الخاص بـمسؤولة التطوير حبيبة حجازي',
+    submitBtn: 'إرسال التقييم', submitHint: 'سيتم حفظ إجابتك في ملف جوجل شيت الخاص بمسؤولة التطوير',
     successH2: 'تم إرسال إجابتك!', successP: 'تم حفظ تقييمك بنجاح. سأراجعه وأتواصل معك فقط إذا كان هناك حاجة لاجتماع.',
     successBtn: 'إرسال إجابة أخرى', sendingText: 'Sending to Google Sheets…',
-    mgrH2: '📊 لوحة مسؤولة التطوير حبيبة حجازي', mgrSub: 'كل إجابات الموظفين — بيانات مباشرة', mgrBack: '← رجوع',
+    mgrH2: '📊 لوحة مسؤولة التطوير', mgrSub: 'كل إجابات الموظفين — بيانات مباشرة', mgrBack: '← رجوع',
     kpiTotal: 'عدد الإجابات', kpiGreen: '✅ بدون اجتماع', kpiAmber: '📞 مكالمة 15 دقيقة', kpiRed: '🗓 اجتماع كامل',
     exportCSV: '⬇ تصدير CSV', clearAll: '🗑 حذف الكل', emptyState: 'لا توجد إجابات حتى الآن.', loading: 'جارٍ التحميل...',
-    mgrModalTitle: 'دخول مسؤولة التطوير حبيبة حجازي',
-    mgrModalP: 'أدخل كلمة مرور مسؤولة التطوير حبيبة حجازي لعرض كل الاستجابات',
+    filterNamePh: 'بحث بالاسم…', clearFilters: '✕ مسح',
+    mgrModalTitle: 'دخول مسؤولة التطوير',
+    mgrModalP: 'أدخل كلمة مرور مسؤولة التطوير لعرض كل الاستجابات',
     mgrModalBtn: 'دخول اللوحة', mgrModalCancel: 'إلغاء',
     pwdError: 'كلمة المرور غير صحيحة، حاول مرة أخرى.',
+    addGoalBtn: '+ أضف هدفاً آخر', addActBtn: '+ أضف نشاطاً آخر',
+    alertNoGoal: 'يرجى إدخال اسم الهدف الأول.',
+    alertNoGoalStatus: 'يرجى اختيار حالة الهدف الأول.',
+    alertNoBlocker: 'يرجى تحديد نوع العقبة الرئيسية.',
+    alertNoBlockerDesc: 'يرجى وصف الموقف في جملة واحدة.',
+    alertNoAct: 'يرجى إدخال اسم النشاط التعليمي الأول.',
+    alertNoActStatus: 'يرجى اختيار حالة النشاط التعليمي الأول.',
+    alertNoMonth: 'يرجى اختيار الشهر والسنة.',
+    alertNoS4a: 'يرجى الإجابة على السؤال 4أ.',
+    alertNoS4b: 'يرجى الإجابة على السؤال 4ب.',
     alertNoName: 'من فضلك أدخل اسمك قبل الإرسال.',
     alertSendError: 'حدث خطأ في الإرسال. تأكد من اتصالك بالإنترنت وحاول مرة أخرى.',
     alertDeleteOne: 'هل تريد حذف هذه الإجابة؟',
@@ -896,7 +954,9 @@ const T = {
     heroEyebrow: 'Monthly Checkup', heroH2: 'Monthly Development Checkup',
     heroP: 'Please fill in the four sections below. Your answers go directly to the development manager and no colleague can see them.',
     empNameLabel: 'Employee Name', empNamePh: 'Your full name',
-    monthLabel: 'Month / Year', monthPh: 'e.g. June 2026',
+    monthLabel: 'Month / Year', monthPh: 'Month', yearPh: 'Year',
+    m01:'January',m02:'February',m03:'March',m04:'April',m05:'May',m06:'June',
+    m07:'July',m08:'August',m09:'September',m10:'October',m11:'November',m12:'December',
     s1Title: 'Your Goal Progress', s1Sub: 'Rate each goal from your development plan — up to 5 goals',
     s1Note: '💡 Goals are taken from your development plan sent in the last email',
     ghTrack: '✅ On Track', ghSlow: '🟡 Slow', ghNoprog: '🔴 No Progress', ghNofit: '⬜ No Longer Fits',
@@ -927,10 +987,21 @@ const T = {
     mgrH2: '📊 Development Manager Dashboard', mgrSub: 'All employee responses — live data', mgrBack: '← Back',
     kpiTotal: 'Total Responses', kpiGreen: '✅ No Meeting', kpiAmber: '📞 15-Min Call', kpiRed: '🗓 Full Meeting',
     exportCSV: '⬇ Export CSV', clearAll: '🗑 Clear All', emptyState: 'No responses yet.', loading: 'Loading...',
+    filterNamePh: 'Search by name…', clearFilters: '✕ Clear',
     mgrModalTitle: 'Development Manager Login',
     mgrModalP: 'Enter the development manager password to view all responses',
     mgrModalBtn: 'Enter Dashboard', mgrModalCancel: 'Cancel',
     pwdError: 'Incorrect password, please try again.',
+    addGoalBtn: '+ Add another goal', addActBtn: '+ Add another activity',
+    alertNoGoal: 'Please enter your first goal.',
+    alertNoGoalStatus: 'Please select a status for Goal 1.',
+    alertNoBlocker: 'Please select the main blocker type.',
+    alertNoBlockerDesc: 'Please describe the situation in one sentence.',
+    alertNoAct: 'Please enter your first learning activity.',
+    alertNoActStatus: 'Please select a completion status for Activity 1.',
+    alertNoMonth: 'Please select a month and year.',
+    alertNoS4a: 'Please answer question 4a.',
+    alertNoS4b: 'Please answer question 4b.',
     alertNoName: 'Please enter your name before submitting.',
     alertSendError: 'An error occurred while sending. Please check your internet connection and try again.',
     alertDeleteOne: 'Delete this response?',
@@ -971,6 +1042,15 @@ function applyLang(lang) {
   });
 
   document.getElementById('lang-btn').textContent = T[lang].langBtn;
+
+  // Re-translate month options
+  document.querySelectorAll('#month-sel option[data-i18n]').forEach(el => {
+    const val = T[lang][el.dataset.i18n];
+    if (val !== undefined) el.textContent = val;
+  });
+  // Re-translate year placeholder
+  const yearSel = document.getElementById('year-sel');
+  if (yearSel.options[0]) yearSel.options[0].textContent = T[lang].yearPh || 'Year';
 }
 
 function toggleLang() {
@@ -1026,13 +1106,53 @@ async function loadDashboardFromSheet() {
   const list = document.getElementById('emp-list');
   list.innerHTML = `<div class="empty-state"><p>${t('loading')}</p></div>`;
   try {
-    const res = await fetch(WEBHOOK_URL + '?action=getResponses');
-    const data = await res.json();
+    const res = await fetch(WEBHOOK_URL + '?action=getResponses', { redirect: 'follow' });
+    const text = await res.text();
+    console.log('[Dashboard] Sheet response:', text.slice(0, 300));
+    const data = JSON.parse(text);
     if (data && Array.isArray(data.responses)) {
       localStorage.setItem(RESPONSES_KEY, JSON.stringify(data.responses));
+      console.log('[Dashboard] Loaded', data.responses.length, 'responses from sheet');
+    } else {
+      console.warn('[Dashboard] Unexpected response shape:', data);
     }
-  } catch(e) { /* offline — fall through to localStorage */ }
+  } catch(e) {
+    console.error('[Dashboard] Failed to fetch from sheet:', e);
+  }
   renderDashboard();
+}
+
+// ── ADD GOAL / ACTIVITY ──
+function addGoal() {
+  for (let i = 2; i <= 5; i++) {
+    const row = document.getElementById('goal-row-' + i);
+    if (row.style.display === 'none') { row.style.display = ''; break; }
+  }
+  const anyHidden = [2,3,4,5].some(i => document.getElementById('goal-row-'+i).style.display === 'none');
+  if (!anyHidden) document.getElementById('add-goal-btn').style.display = 'none';
+}
+
+function removeGoal(n) {
+  document.getElementById('goal-row-' + n).style.display = 'none';
+  document.getElementById('g' + n + 'name').value = '';
+  document.querySelectorAll(`input[name="g${n}"]`).forEach(r => r.checked = false);
+  document.getElementById('add-goal-btn').style.display = '';
+}
+
+function addActivity() {
+  for (let i = 2; i <= 5; i++) {
+    const block = document.getElementById('act-block-' + i);
+    if (block.style.display === 'none') { block.style.display = ''; break; }
+  }
+  const anyHidden = [2,3,4,5].some(i => document.getElementById('act-block-'+i).style.display === 'none');
+  if (!anyHidden) document.getElementById('add-act-btn').style.display = 'none';
+}
+
+function removeActivity(n) {
+  document.getElementById('act-block-' + n).style.display = 'none';
+  document.getElementById('c' + n + 'name').value = '';
+  document.querySelectorAll(`input[name="c${n}s"], input[name="sc${n}"]`).forEach(r => r.checked = false);
+  document.getElementById('add-act-btn').style.display = '';
 }
 
 // ── FORM LOGIC ──
@@ -1044,16 +1164,78 @@ function decideAction() {
   return '15-Min Call';
 }
 
+function fieldError(el, msg) {
+  el.classList.add('field-error');
+  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  el.focus && el.focus();
+  // remove highlight on next interaction
+  el.addEventListener('input', () => el.classList.remove('field-error'), { once: true });
+  el.addEventListener('change', () => el.classList.remove('field-error'), { once: true });
+  alert(msg);
+}
+
 async function submitForm() {
-  const name = document.getElementById('emp-name').value.trim();
-  if (!name) { alert(t('alertNoName')); return; }
+  // Name
+  const nameEl = document.getElementById('emp-name');
+  if (!nameEl.value.trim()) { fieldError(nameEl, t('alertNoName')); return; }
+
+  // Month
+  const monthEl = document.getElementById('month-sel');
+  const yearEl = document.getElementById('year-sel');
+  if (!monthEl.value || !yearEl.value) { fieldError(monthEl.value ? yearEl : monthEl, t('alertNoMonth')); return; }
+
+  // Goal 1 name
+  const g1nameEl = document.getElementById('g1name');
+  if (!g1nameEl.value.trim()) { fieldError(g1nameEl, t('alertNoGoal')); return; }
+
+  // Goal 1 status
+  if (!document.querySelector('input[name="g1"]:checked')) {
+    const g1row = document.getElementById('goal-row-1');
+    g1row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    alert(t('alertNoGoalStatus')); return;
+  }
+
+  // Blocker: required if any visible goal is Slow or No Progress
+  const needsBlocker = [1,2,3,4,5].some(i => {
+    const row = document.getElementById('goal-row-' + i);
+    if (i > 1 && row.style.display === 'none') return false;
+    const v = document.querySelector(`input[name="g${i}"]:checked`)?.value;
+    return v === 'Slow' || v === 'No Progress';
+  });
+  if (needsBlocker) {
+    if (!document.querySelector('input[name="blocker"]:checked')) {
+      const blockerEl = document.querySelector('.blocker-grid');
+      blockerEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      alert(t('alertNoBlocker')); return;
+    }
+    const descEl = document.getElementById('blockerdesc');
+    if (!descEl.value.trim()) { fieldError(descEl, t('alertNoBlockerDesc')); return; }
+  }
+
+  // Course 1 name
+  const c1nameEl = document.getElementById('c1name');
+  if (!c1nameEl.value.trim()) { fieldError(c1nameEl, t('alertNoAct')); return; }
+
+  // Course 1 status
+  if (!document.querySelector('input[name="c1s"]:checked')) {
+    c1nameEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    alert(t('alertNoActStatus')); return;
+  }
+
+  // Section 4a
+  const s4aEl = document.getElementById('s4a');
+  if (!s4aEl.value.trim()) { fieldError(s4aEl, t('alertNoS4a')); return; }
+
+  // Section 4b
+  const s4bEl = document.getElementById('s4b');
+  if (!s4bEl.value.trim()) { fieldError(s4bEl, t('alertNoS4b')); return; }
 
   const gv = n => document.querySelector(`input[name="g${n}"]:checked`)?.value || '';
   const cv = n => document.querySelector(`input[name="c${n}s"]:checked`)?.value || '';
   const sv = n => document.querySelector(`input[name="sc${n}"]:checked`)?.value || '';
 
   const payload = {
-    name, month: document.getElementById('month-year').value.trim(),
+    name, month: (()=>{ const ms=document.getElementById('month-sel'); const ys=document.getElementById('year-sel'); return (T.en['m'+ms.value] || ms.value) + ' ' + ys.value; })(),
     g1name: document.getElementById('g1name').value.trim(), g1status: gv(1),
     g2name: document.getElementById('g2name').value.trim(), g2status: gv(2),
     g3name: document.getElementById('g3name').value.trim(), g3status: gv(3),
@@ -1097,8 +1279,16 @@ function showSuccess() {
 }
 
 function resetForm() {
-  document.querySelectorAll('input[type=text], textarea').forEach(el => el.value = '');
+  document.querySelectorAll('input[type=text], input[type=month], textarea').forEach(el => el.value = '');
   document.querySelectorAll('input[type=radio]').forEach(el => el.checked = false);
+  // reset goal rows
+  visibleGoals = 1;
+  for (let i = 2; i <= 5; i++) { document.getElementById('goal-row-'+i).style.display = 'none'; }
+  document.getElementById('add-goal-btn').style.display = '';
+  // reset activity blocks
+  visibleActs = 1;
+  for (let i = 2; i <= 5; i++) { document.getElementById('act-block-'+i).style.display = 'none'; }
+  document.getElementById('add-act-btn').style.display = '';
   document.getElementById('form-content').style.display = 'block';
   document.getElementById('success-screen').style.display = 'none';
   document.getElementById('submit-btn').disabled = false;
@@ -1107,7 +1297,19 @@ function resetForm() {
 
 // ── DASHBOARD ──
 function renderDashboard() {
-  const responses = JSON.parse(localStorage.getItem(RESPONSES_KEY) || '[]');
+  const all = JSON.parse(localStorage.getItem(RESPONSES_KEY) || '[]');
+  const nameQ = (document.getElementById('filter-name')?.value || '').toLowerCase().trim();
+  const fromD = document.getElementById('filter-date-from')?.value;
+  const toD   = document.getElementById('filter-date-to')?.value;
+  const responses = all.filter(r => {
+    if (nameQ && !(r.name||'').toLowerCase().includes(nameQ)) return false;
+    if (fromD || toD) {
+      const ts = new Date(r.submittedAt);
+      if (fromD && ts < new Date(fromD)) return false;
+      if (toD   && ts > new Date(toD + 'T23:59:59')) return false;
+    }
+    return true;
+  });
   document.getElementById('kpi-total').textContent = responses.length;
   document.getElementById('kpi-green').textContent = responses.filter(r => r.action === 'No Meeting').length;
   document.getElementById('kpi-amber').textContent = responses.filter(r => r.action === '15-Min Call').length;
@@ -1118,6 +1320,25 @@ function renderDashboard() {
     return;
   }
   list.innerHTML = responses.map((r, idx) => empCardHTML(r, idx)).join('');
+}
+
+function clearFilters() {
+  document.getElementById('filter-name').value = '';
+  document.getElementById('filter-date-from').value = '';
+  document.getElementById('filter-date-to').value = '';
+  renderDashboard();
+}
+
+function fmtVal(v) {
+  if (!v) return '—';
+  const s = String(v);
+  if (!s.includes('T')) return s;
+  const d = new Date(v);
+  if (isNaN(d)) return s;
+  // midnight = month field (Google Sheets stored it as a date)
+  if (d.getHours() === 0 && d.getMinutes() === 0 && d.getSeconds() === 0)
+    return d.toLocaleDateString('en-GB', { month: 'long', year: 'numeric' });
+  return d.toLocaleString('en-GB', { dateStyle:'short', timeStyle:'short' });
 }
 
 function empCardHTML(r, idx) {
@@ -1133,7 +1354,7 @@ function empCardHTML(r, idx) {
   const courses = [1,2,3,4,5].map(i => r[`c${i}name`] ? `<div class="detail-row"><span class="lbl">${r[`c${i}name`]}</span><span class="val">${r[`c${i}status`]||'—'}${r[`c${i}score`] ? ' · '+t('scoreRating')+' '+r[`c${i}score`]+'/5':''}</span></div>` : '').join('');
   return `<div class="emp-card">
     <div class="emp-card-head" onclick="toggleCard(${idx})">
-      <div><div class="emp-name">${r.name}</div><div class="emp-month">${r.month||'—'} · ${r.submittedAt}</div></div>
+      <div><div class="emp-name">${r.name}</div><div class="emp-month">${fmtVal(r.month)} · ${fmtVal(r.submittedAt)}</div></div>
       ${badge}
     </div>
     <div class="emp-card-body" id="cb-${idx}">
@@ -1184,6 +1405,20 @@ function exportCSV() {
 }
 
 // ── INIT ──
+(function populateYears() {
+  const sel = document.getElementById('year-sel');
+  const cur = new Date().getFullYear();
+  for (let y = cur - 1; y <= cur + 1; y++) {
+    const o = document.createElement('option');
+    o.value = y; o.textContent = y;
+    sel.appendChild(o);
+  }
+  // Default to current month/year
+  const now = new Date();
+  document.getElementById('month-sel').value = String(now.getMonth()+1).padStart(2,'0');
+  sel.value = now.getFullYear();
+})();
+
 applyLang('en');
 document.getElementById('pwd-modal').addEventListener('click', e => { if (e.target === document.getElementById('pwd-modal')) closePwdModal(); });
 </script>
