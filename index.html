@@ -831,7 +831,7 @@ const T = {
     successBtn: 'إرسال إجابة أخرى', sendingText: 'Sending to Google Sheets…',
     mgrH2: '📊 لوحة مسؤولة التطوير حبيبة حجازي', mgrSub: 'كل إجابات الموظفين — بيانات مباشرة', mgrBack: '← رجوع',
     kpiTotal: 'عدد الإجابات', kpiGreen: '✅ بدون اجتماع', kpiAmber: '📞 مكالمة 15 دقيقة', kpiRed: '🗓 اجتماع كامل',
-    exportCSV: '⬇ تصدير CSV', clearAll: '🗑 حذف الكل', emptyState: 'لا توجد إجابات حتى الآن.',
+    exportCSV: '⬇ تصدير CSV', clearAll: '🗑 حذف الكل', emptyState: 'لا توجد إجابات حتى الآن.', loading: 'جارٍ التحميل...',
     mgrModalTitle: 'دخول مسؤولة التطوير حبيبة حجازي',
     mgrModalP: 'أدخل كلمة مرور مسؤولة التطوير حبيبة حجازي لعرض كل الاستجابات',
     mgrModalBtn: 'دخول اللوحة', mgrModalCancel: 'إلغاء',
@@ -926,7 +926,7 @@ const T = {
     successBtn: 'Submit Another Response', sendingText: 'Sending to Google Sheets…',
     mgrH2: '📊 Development Manager Dashboard', mgrSub: 'All employee responses — live data', mgrBack: '← Back',
     kpiTotal: 'Total Responses', kpiGreen: '✅ No Meeting', kpiAmber: '📞 15-Min Call', kpiRed: '🗓 Full Meeting',
-    exportCSV: '⬇ Export CSV', clearAll: '🗑 Clear All', emptyState: 'No responses yet.',
+    exportCSV: '⬇ Export CSV', clearAll: '🗑 Clear All', emptyState: 'No responses yet.', loading: 'Loading...',
     mgrModalTitle: 'Development Manager Login',
     mgrModalP: 'Enter the development manager password to view all responses',
     mgrModalBtn: 'Enter Dashboard', mgrModalCancel: 'Cancel',
@@ -1018,8 +1018,21 @@ function openManagerDashboard() {
   document.getElementById('intro-page').style.display = 'none';
   document.getElementById('form-page').style.display = 'none';
   document.getElementById('mgr-page').style.display = 'block';
-  renderDashboard();
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  loadDashboardFromSheet();
+}
+
+async function loadDashboardFromSheet() {
+  const list = document.getElementById('emp-list');
+  list.innerHTML = `<div class="empty-state"><p>${t('loading')}</p></div>`;
+  try {
+    const res = await fetch(WEBHOOK_URL + '?action=getResponses');
+    const data = await res.json();
+    if (data && Array.isArray(data.responses)) {
+      localStorage.setItem(RESPONSES_KEY, JSON.stringify(data.responses));
+    }
+  } catch(e) { /* offline — fall through to localStorage */ }
+  renderDashboard();
 }
 
 // ── FORM LOGIC ──
