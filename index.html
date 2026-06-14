@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Monthly Development Pulse Check</title>
+<title>التقييم التطويري الشهري</title>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 :root {
@@ -21,7 +21,7 @@
   --border: #D0D7DE;
   --shadow: 0 2px 12px rgba(0,0,0,0.08);
 }
-body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+body { font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
   background: #F0F4F8; color: #1A1A2E; min-height: 100vh; }
 
 /* ── TOPBAR ── */
@@ -141,7 +141,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   padding: 10px 14px; font-size: 13px; color: #7A5C00; margin-bottom: 1rem; }
 
 /* GOALS */
-.goal-headers { display: grid; grid-template-columns: 1fr 72px 72px 85px 96px;
+.goal-headers { direction: ltr; display: grid; grid-template-columns: 1fr 72px 72px 85px 96px;
   gap: 5px; margin-bottom: 4px; }
 .goal-headers span { font-size: 10px; font-weight: 700; text-align: center;
   padding: 4px 2px; border-radius: 5px; letter-spacing: 0.03em; }
@@ -150,10 +150,10 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 .gh-noprog { background: var(--red-l);   color: var(--red); }
 .gh-nofit  { background: #E8E8E8; color: #555; }
 
-.goal-row { display: grid; grid-template-columns: 1fr 72px 72px 85px 96px;
+.goal-row { direction: ltr; display: grid; grid-template-columns: 1fr 72px 72px 85px 96px;
   gap: 5px; align-items: center; padding: 7px 0; border-bottom: 1px solid #F0F0F0; }
 .goal-row:last-of-type { border-bottom: none; }
-.goal-name-input { border: 1.5px solid var(--border); border-radius: 7px; padding: 7px 10px;
+.goal-name-input { direction: rtl; border: 1.5px solid var(--border); border-radius: 7px; padding: 7px 10px;
   font-size: 13px; font-family: inherit; color: var(--navy); width: 100%; background: var(--gray-l); }
 .goal-name-input:focus { outline: none; border-color: var(--blue); background: #fff; }
 
@@ -174,7 +174,7 @@ textarea:focus { outline: none; border-color: var(--blue); background: #fff; }
 .field-label { font-size: 12px; font-weight: 600; color: var(--navy); margin-bottom: 6px; display: block; }
 
 /* BLOCKERS */
-.blocker-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 1rem; }
+.blocker-grid { direction: rtl; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 1rem; }
 .blocker-radio { display: none; }
 .blocker-lbl { display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: 4px; padding: 14px 8px; border: 1.5px solid var(--border); border-radius: 10px;
@@ -194,7 +194,7 @@ textarea:focus { outline: none; border-color: var(--blue); background: #fff; }
   font-size: 13px; font-family: inherit; background: var(--gray-l); }
 .act-input:focus { outline: none; border-color: var(--green); background: #fff; }
 
-.pill-group { display: flex; gap: 6px; flex-wrap: wrap; }
+.pill-group { direction: rtl; display: flex; gap: 6px; flex-wrap: wrap; }
 .pill-radio { display: none; }
 .pill-lbl { padding: 5px 14px; border: 1.5px solid var(--border); border-radius: 20px;
   font-size: 12px; color: var(--gray); cursor: pointer; transition: all .15s; background: #fff; }
@@ -203,7 +203,7 @@ textarea:focus { outline: none; border-color: var(--blue); background: #fff; }
 .pill-radio.p-progress:checked + .pill-lbl { background: var(--amber-l); border-color: var(--amber); color: var(--amber); font-weight: 600; }
 .pill-radio.p-abandon:checked  + .pill-lbl { background: var(--red-l);   border-color: var(--red);   color: var(--red);   font-weight: 600; }
 
-.score-group { display: flex; gap: 6px; align-items: center; }
+.score-group { direction: ltr; display: flex; gap: 6px; align-items: center; }
 .score-radio { display: none; }
 .score-lbl { width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
   border: 1.5px solid var(--border); border-radius: 8px; cursor: pointer; font-size: 14px;
@@ -355,15 +355,15 @@ textarea:focus { outline: none; border-color: var(--blue); background: #fff; }
 <div class="modal-overlay" id="setup-modal">
   <div class="modal">
     <button class="modal-close" onclick="closeModal()">✕</button>
-    <h2>🔧 Connect to Google Sheets</h2>
-    <p class="sub">One-time setup — takes 5 minutes. After this, every submission goes directly to your sheet.</p>
+    <h2>🔧 الربط مع جوجل شيت</h2>
+    <p class="sub">إعداد لمرة واحدة فقط — يستغرق 5 دقائق. بعد ذلك، كل استجابة تذهب مباشرة إلى ملفك.</p>
     <div class="step-block">
-      <h3>Step 1 — Create the Google Sheet</h3>
-      <p>Go to <a href="https://sheets.new" target="_blank">sheets.new</a> → name it <strong>"Pulse Check Responses"</strong>.</p>
+      <h3>الخطوة 1 — إنشاء ملف جوجل شيت</h3>
+      <p>افتح <a href="https://sheets.new" target="_blank">sheets.new</a> وسمّ الملف <strong>"استجابات التقييم الشهري"</strong>.</p>
     </div>
     <div class="step-block">
-      <h3>Step 2 — Open Apps Script</h3>
-      <p>Click <strong>Extensions → Apps Script</strong>. Delete existing code and paste this:</p>
+      <h3>الخطوة 2 — فتح Apps Script</h3>
+      <p>من القائمة اختر <strong>Extensions → Apps Script</strong>. احذف الكود الموجود ولصق هذا الكود:</p>
       <div class="code-block" id="apps-script-code">const SHEET_NAME = "Responses";
 
 function doPost(e) {
@@ -414,13 +414,13 @@ function doGet() {
       <button class="copy-btn" onclick="copyScript()">Copy</button>
     </div>
     <div class="step-block">
-      <h3>Step 3 — Deploy as Web App</h3>
-      <p>Click <strong>Deploy → New Deployment</strong> · Type: <strong>Web app</strong> · Execute as: <strong>Me</strong> · Access: <strong>Anyone</strong> · Deploy → authorize → copy the <strong>Web App URL</strong>.</p>
+      <h3>الخطوة 3 — نشر التطبيق</h3>
+      <p>اضغط <strong>Deploy → New Deployment</strong> · النوع: <strong>Web app</strong> · التنفيذ كـ: <strong>Me</strong> · الوصول: <strong>Anyone</strong> · اضغط Deploy ووافق على الأذونات، ثم انسخ <strong>رابط Web App</strong>.</p>
     </div>
     <div class="step-block" style="border-color:var(--green)">
-      <h3>Step 4 — Paste the URL here</h3>
+      <h3>الخطوة 4 — الصق الرابط هنا</h3>
       <input class="url-input" type="text" id="webhook-url-input" placeholder="https://script.google.com/macros/s/…/exec" />
-      <br><button class="btn-save-url" onclick="saveWebhookUrl()">✅ Save & Connect</button>
+      <br><button class="btn-save-url" onclick="saveWebhookUrl()">✅ حفظ وربط</button>
     </div>
   </div>
 </div>
@@ -429,30 +429,30 @@ function doGet() {
 <div class="modal-overlay" id="pwd-modal">
   <div class="pwd-modal">
     <div style="font-size:36px;margin-bottom:10px;">🔒</div>
-    <h2>HR Team Access</h2>
-    <p>Enter the HR team password to view all responses</p>
+    <h2>دخول مسؤولة التطوير حبيبة حجازي</h2>
+    <p>أدخل كلمة مرور مسؤولة التطوير حبيبة حجازي لعرض كل الاستجابات</p>
     <input class="pwd-input" type="password" id="pwd-input" placeholder="••••••••" onkeydown="if(event.key==='Enter')checkPwd()" />
-    <div class="pwd-error" id="pwd-error">Incorrect password. Try again.</div>
-    <button class="btn-pwd" onclick="checkPwd()">Enter Dashboard</button>
+    <div class="pwd-error" id="pwd-error">كلمة المرور غير صحيحة، حاول مرة أخرى.</div>
+    <button class="btn-pwd" onclick="checkPwd()">دخول اللوحة</button>
     <div style="margin-top:12px;">
-      <button onclick="closePwdModal()" style="background:none;border:none;color:var(--gray);font-size:13px;cursor:pointer;">Cancel</button>
+      <button onclick="closePwdModal()" style="background:none;border:none;color:var(--gray);font-size:13px;cursor:pointer;">إلغاء</button>
     </div>
   </div>
 </div>
 
 <!-- ══════════ TOP BAR ══════════ -->
 <div class="topbar">
-  <span class="topbar-title">Development Pulse Check</span>
+  <span class="topbar-title">التقييم التطويري الشهري</span>
   <div class="topbar-right">
-    <span id="connection-dot" style="font-size:12px;color:#aaa;">⚪ Not connected</span>
-    <button class="btn-topbar" onclick="openModal()">🔧 Setup</button>
-    <button class="btn-topbar" onclick="openPwdModal()" id="mgr-btn">📊 HR Team</button>
+    <span id="connection-dot" style="font-size:12px;color:#aaa;">⚪ غير متصل</span>
+    <button class="btn-topbar" onclick="openModal()">🔧 الإعداد</button>
+    <button class="btn-topbar" onclick="openPwdModal()" id="mgr-btn">📊 لوحة مسؤولة التطوير حبيبة حجازي</button>
   </div>
 </div>
 
 <!-- CONNECTION BANNER -->
 <div class="setup-banner" id="setup-banner">
-  ⚠️ <strong>Not connected yet.</strong> Click <strong>🔧 Setup</strong> to link this form to your Google Sheet.
+  ⚠️ <strong>لم يتم الربط بعد.</strong> اضغط على <strong>🔧 الإعداد</strong> لربط هذا النموذج بجوجل شيت الخاص بك.
 </div>
 
 <!-- ════════════ INTRO PAGE ════════════ -->
@@ -460,114 +460,114 @@ function doGet() {
 <div class="page">
 
   <div class="intro-hero">
-    <h1>Monthly Development<br>Pulse Check</h1>
-    <p>This monthly check-in replaces the standard meeting. Your honest answers help me, in the HR team, understand your progress and give you the right kind of support for your development plan — without unnecessary meetings.</p>
+    <h1>التقييم التطويري<br>الشهري</h1>
+    <p>هذا التقييم الشهري يحل محل الاجتماع التقليدي. إجاباتك الصادقة ستساعدني في ضبط خطتك التطويرية وتقديم الدعم المناسب لك — دون اجتماعات غير ضرورية.</p>
     <div class="intro-meta">
-      <span class="intro-tag">⏱ Takes less than 10 minutes</span>
-      <span class="intro-tag">🔒 Only the HR team sees your answers</span>
-      <span class="intro-tag">📊 4 sections</span>
+      <span class="intro-tag">⏱ يستغرق أقل من 10 دقائق</span>
+      <span class="intro-tag">🔒 إجاباتك يراها مسؤولة التطوير حبيبة حجازي فقط</span>
+      <span class="intro-tag">📊 4 أقسام</span>
     </div>
   </div>
 
   <div class="intro-sections">
     <div class="intro-card ic1">
       <div class="intro-card-num">1</div>
-      <h3>Goal Progress Snapshot</h3>
-      <p>Rate each of your development goals using the color-coded status buttons. You have up to <strong>5 goals</strong>.</p>
+      <h3>متابعة التقدم في الأهداف</h3>
+      <p>قيّم كل هدف من أهدافك التطويرية باستخدام الأزرار الملونة. يمكنك إضافة حتى <strong>5 أهداف</strong>.</p>
       <ul>
-        <li>Write a short description of each goal</li>
-        <li>Pick the status that fits best</li>
-        <li>Add a comment if you need to explain</li>
+        <li>اكتب وصفًا مختصرًا لكل هدف</li>
+        <li>اختر الحالة الأقرب لواقعك</li>
+        <li>أضف ملاحظة إن احتجت للتوضيح</li>
       </ul>
     </div>
     <div class="intro-card ic2">
       <div class="intro-card-num">2</div>
-      <h3>Friction Diagnostic</h3>
-      <p>Only fill this in if one or more goals are slow or stalled. This helps me understand <strong>why</strong> — not just what.</p>
+      <h3>تشخيص العقبات</h3>
+      <p>يُملأ فقط إذا كان لديك هدف أو أكثر متأخر أو متوقف. يساعدني هذا على فهم <strong>السبب</strong> — لا فقط النتيجة.</p>
       <ul>
-        <li>Pick the main blocker type</li>
-        <li>Write one sentence describing the situation</li>
-        <li>Skip entirely if all goals are green ✅</li>
+        <li>اختر نوع العقبة الأساسية</li>
+        <li>اكتب جملة واحدة تصف الموقف</li>
+        <li>تجاوز هذا القسم تمامًا إذا كانت كل الأهداف باللون الأخضر ✅</li>
       </ul>
     </div>
     <div class="intro-card ic3">
       <div class="intro-card-num">3</div>
       <h3>Learning & Course Effectiveness</h3>
-      <p>List up to <strong>5 learning activities</strong> you engaged with this month — courses, workshops, books, or videos.</p>
+      <p>أضف حتى <strong>5 أنشطة تعليمية</strong> شاركت فيها هذا الشهر — دورات، ورش عمل، كتب، أو مقاطع تعليمية.</p>
       <ul>
-        <li>Name or link to the course</li>
-        <li>Mark completion status</li>
-        <li>Rate how much you've applied it (1–5)</li>
+        <li>اسم الدورة أو رابطها</li>
+        <li>حدد حالة الإنجاز</li>
+        <li>قيّم مدى تطبيقك لها (من 1 إلى 5)</li>
       </ul>
     </div>
     <div class="intro-card ic4">
       <div class="intro-card-num">4</div>
-      <h3>The Single Most Valuable Question</h3>
-      <p>The most important section. Two questions that unlock real development conversations.</p>
+      <h3>السؤال الأكثر أهمية</h3>
+      <p>أهم قسم في التقييم. سؤالان يفتحان الباب لحوارات تطويرية حقيقية.</p>
       <ul>
-        <li>What ONE skill would change your work most next month?</li>
-        <li>Share a micro-win — even small progress counts</li>
+        <li>ما المهارة الواحدة التي ستغيّر طريقة عملك الشهر القادم؟</li>
+        <li>شارك إنجازًا صغيرًا — كل تقدم له قيمة</li>
       </ul>
     </div>
   </div>
 
   <div class="legend-card">
-    <h3>🎨 Color Guide — Goal Status Buttons</h3>
+    <h3>🎨 دليل الألوان — حالة الأهداف</h3>
     <div class="legend-row">
       <div class="legend-item">
         <div class="legend-dot ld-green">✅</div>
-        <div><span>On Track</span><small>Progress is good, no issues</small></div>
+        <div><span>على المسار الصحيح</span><small>التقدم جيد، لا توجد عقبات</small></div>
       </div>
       <div class="legend-item">
         <div class="legend-dot ld-amber">🟡</div>
-        <div><span>Slow Progress</span><small>Moving, but behind pace</small></div>
+        <div><span>تقدم بطيء</span><small>هناك حركة، ولكن أبطأ من المخطط</small></div>
       </div>
       <div class="legend-item">
         <div class="legend-dot ld-red">🔴</div>
-        <div><span>No Progress</span><small>Completely stalled</small></div>
+        <div><span>لا يوجد تقدم</span><small>الهدف متوقف تمامًا</small></div>
       </div>
       <div class="legend-item">
         <div class="legend-dot ld-gray">⬜</div>
-        <div><span>No Longer Fits</span><small>Goal is no longer relevant</small></div>
+        <div><span>لم يعد مناسبًا</span><small>الهدف لم يعد ذا صلة</small></div>
       </div>
     </div>
   </div>
 
   <div class="intro-rules">
-    <h3>📋 What happens after you submit?</h3>
+    <h3>📋 ماذا يحدث بعد إرسال إجاباتك؟</h3>
     <div class="rule-row">
       <div class="rule-icon">✅</div>
       <div class="rule-text">
-        <strong>All goals green → No meeting needed</strong>
-        <span>I will see your response and take note. No action required from either side.</span>
+        <strong>كل الأهداف باللون الأخضر ← لا حاجة لاجتماع</strong>
+        <span>سأرى إجابتك وآخذ علمًا بها. لا حاجة لأي إجراء من أي طرف.</span>
       </div>
     </div>
     <div class="rule-row">
       <div class="rule-icon">📞</div>
       <div class="rule-text">
-        <strong>Mixed results → 15-minute call</strong>
-        <span>If some goals are slow, I may schedule a quick check-in to help unblock you.</span>
+        <strong>نتائج متفاوتة ← مكالمة سريعة 15 دقيقة</strong>
+        <span>إذا كانت بعض الأهداف متأخرة، قد أحدد مكالمة سريعة لمساعدتك على تجاوز العقبة.</span>
       </div>
     </div>
     <div class="rule-row">
       <div class="rule-icon">🗓</div>
       <div class="rule-text">
-        <strong>Any goal with no progress → Full meeting</strong>
-        <span>I will schedule a dedicated session to understand the situation and support you.</span>
+        <strong>أي هدف بلا تقدم ← اجتماع كامل</strong>
+        <span>سأحدد جلسة مخصصة لفهم الموقف ومساعدتك.</span>
       </div>
     </div>
     <div class="rule-row">
       <div class="rule-icon">🔒</div>
       <div class="rule-text">
-        <strong>Your answers are private</strong>
-        <span>Only the HR team can see your responses. Other employees cannot view what you submitted.</span>
+        <strong>إجاباتك سرية تمامًا</strong>
+        <span>مسؤولة التطوير حبيبة حجازي فقط تستطيع رؤية إجاباتك. لا يمكن لأي زميل آخر الاطلاع على ما كتبته.</span>
       </div>
     </div>
   </div>
 
   <div class="intro-start">
-    <button class="btn-start" onclick="startForm()">Start My Check-in →</button>
-    <p class="start-hint">You'll be able to review everything before submitting</p>
+    <button class="btn-start" onclick="startForm()">ابدأ تقييمي الآن ←</button>
+    <p class="start-hint">ستتمكن من مراجعة كل إجاباتك قبل الإرسال</p>
   </div>
 
 </div>
@@ -579,20 +579,20 @@ function doGet() {
 
   <div class="success-screen" id="success-screen">
     <div class="success-icon">✅</div>
-    <h2>Response submitted!</h2>
-    <p>Your check-in has been saved. I will review it and reach out only if a meeting is needed.</p>
-    <button class="btn-secondary" onclick="resetForm()">Submit another response</button>
+    <h2>تم إرسال إجابتك!</h2>
+    <p>تم حفظ تقييمك بنجاح. سأراجعه وأتواصل معك فقط إذا كان هناك حاجة لاجتماع.</p>
+    <button class="btn-secondary" onclick="resetForm()">إرسال إجابة أخرى</button>
   </div>
 
   <div id="form-content">
     <!-- HERO -->
     <div class="hero">
-      <div class="hero-eyebrow">Monthly Check-in</div>
-      <h2>Development Pulse Check</h2>
-      <p>Fill in all 4 sections below. Your answers go directly to me in the HR team and are not visible to other employees.</p>
+      <div class="hero-eyebrow">التقييم الشهري</div>
+      <h2>التقييم التطويري الشهري</h2>
+      <p>يرجى تعبئة الأقسام الأربعة بالأسفل. إجاباتك تذهب مباشرة إلى مسؤولة التطوير حبيبة حجازي ولا يمكن لأي زميل آخر رؤيتها.</p>
       <div class="hero-fields">
-        <div><label>Employee Name</label><input type="text" id="emp-name" placeholder="Your full name" /></div>
-        <div><label>Month / Year</label><input type="text" id="month-year" placeholder="e.g. June 2026" /></div>
+        <div><label>اسم الموظف</label><input type="text" id="emp-name" placeholder="اسمك بالكامل" /></div>
+        <div><label>الشهر / السنة</label><input type="text" id="month-year" placeholder="مثال: يونيو 2026" /></div>
       </div>
     </div>
 
@@ -601,58 +601,58 @@ function doGet() {
       <div class="section-head">
         <div class="section-num">1</div>
         <div class="section-head-text">
-          <h2>Goal Progress Snapshot</h2>
-          <p>Rate each goal from your development plan — up to 5 goals</p>
+          <h2>مستوى تقدمك في الأهداف</h2>
+          <p>قيّم كل هدف من خطتك التطويرية — حتى 5 أهداف</p>
         </div>
       </div>
       <div class="section-body">
-        <div class="note-box">💡 Goals are from your last development plan conclusion email</div>
+        <div class="note-box">💡 الأهداف مأخوذة من خطتك التطويرية المرسلة في آخر بريد إلكتروني</div>
         <div class="goal-headers">
           <span></span>
-          <span class="gh-track">✅ On Track</span>
-          <span class="gh-slow">🟡 Slow</span>
-          <span class="gh-noprog">🔴 No Progress</span>
-          <span class="gh-nofit">⬜ No Longer Fits</span>
+          <span class="gh-track">✅ على المسار</span>
+          <span class="gh-slow">🟡 بطيء</span>
+          <span class="gh-noprog">🔴 بلا تقدم</span>
+          <span class="gh-nofit">⬜ غير مناسب</span>
         </div>
         <!-- 5 goal rows -->
         <div class="goal-row">
-          <input class="goal-name-input" type="text" id="g1name" placeholder="Goal 1" />
+          <input class="goal-name-input" type="text" id="g1name" placeholder="الهدف 1" />
           <div><input type="radio" class="status-radio r-green" name="g1" id="g1g" value="On Track"><label class="status-lbl status-lbl-green" for="g1g">✅</label></div>
           <div><input type="radio" class="status-radio r-amber" name="g1" id="g1a" value="Slow"><label class="status-lbl status-lbl-amber" for="g1a">🟡</label></div>
           <div><input type="radio" class="status-radio r-red"   name="g1" id="g1r" value="No Progress"><label class="status-lbl status-lbl-red" for="g1r">🔴</label></div>
           <div><input type="radio" class="status-radio r-gray"  name="g1" id="g1x" value="No Longer Fits"><label class="status-lbl status-lbl-gray" for="g1x">⬜</label></div>
         </div>
         <div class="goal-row">
-          <input class="goal-name-input" type="text" id="g2name" placeholder="Goal 2" />
+          <input class="goal-name-input" type="text" id="g2name" placeholder="الهدف 2" />
           <div><input type="radio" class="status-radio r-green" name="g2" id="g2g" value="On Track"><label class="status-lbl status-lbl-green" for="g2g">✅</label></div>
           <div><input type="radio" class="status-radio r-amber" name="g2" id="g2a" value="Slow"><label class="status-lbl status-lbl-amber" for="g2a">🟡</label></div>
           <div><input type="radio" class="status-radio r-red"   name="g2" id="g2r" value="No Progress"><label class="status-lbl status-lbl-red" for="g2r">🔴</label></div>
           <div><input type="radio" class="status-radio r-gray"  name="g2" id="g2x" value="No Longer Fits"><label class="status-lbl status-lbl-gray" for="g2x">⬜</label></div>
         </div>
         <div class="goal-row">
-          <input class="goal-name-input" type="text" id="g3name" placeholder="Goal 3 (optional)" />
+          <input class="goal-name-input" type="text" id="g3name" placeholder="الهدف 3 (اختياري)" />
           <div><input type="radio" class="status-radio r-green" name="g3" id="g3g" value="On Track"><label class="status-lbl status-lbl-green" for="g3g">✅</label></div>
           <div><input type="radio" class="status-radio r-amber" name="g3" id="g3a" value="Slow"><label class="status-lbl status-lbl-amber" for="g3a">🟡</label></div>
           <div><input type="radio" class="status-radio r-red"   name="g3" id="g3r" value="No Progress"><label class="status-lbl status-lbl-red" for="g3r">🔴</label></div>
           <div><input type="radio" class="status-radio r-gray"  name="g3" id="g3x" value="No Longer Fits"><label class="status-lbl status-lbl-gray" for="g3x">⬜</label></div>
         </div>
         <div class="goal-row">
-          <input class="goal-name-input" type="text" id="g4name" placeholder="Goal 4 (optional)" />
+          <input class="goal-name-input" type="text" id="g4name" placeholder="الهدف 4 (اختياري)" />
           <div><input type="radio" class="status-radio r-green" name="g4" id="g4g" value="On Track"><label class="status-lbl status-lbl-green" for="g4g">✅</label></div>
           <div><input type="radio" class="status-radio r-amber" name="g4" id="g4a" value="Slow"><label class="status-lbl status-lbl-amber" for="g4a">🟡</label></div>
           <div><input type="radio" class="status-radio r-red"   name="g4" id="g4r" value="No Progress"><label class="status-lbl status-lbl-red" for="g4r">🔴</label></div>
           <div><input type="radio" class="status-radio r-gray"  name="g4" id="g4x" value="No Longer Fits"><label class="status-lbl status-lbl-gray" for="g4x">⬜</label></div>
         </div>
         <div class="goal-row">
-          <input class="goal-name-input" type="text" id="g5name" placeholder="Goal 5 (optional)" />
+          <input class="goal-name-input" type="text" id="g5name" placeholder="الهدف 5 (اختياري)" />
           <div><input type="radio" class="status-radio r-green" name="g5" id="g5g" value="On Track"><label class="status-lbl status-lbl-green" for="g5g">✅</label></div>
           <div><input type="radio" class="status-radio r-amber" name="g5" id="g5a" value="Slow"><label class="status-lbl status-lbl-amber" for="g5a">🟡</label></div>
           <div><input type="radio" class="status-radio r-red"   name="g5" id="g5r" value="No Progress"><label class="status-lbl status-lbl-red" for="g5r">🔴</label></div>
           <div><input type="radio" class="status-radio r-gray"  name="g5" id="g5x" value="No Longer Fits"><label class="status-lbl status-lbl-gray" for="g5x">⬜</label></div>
         </div>
         <div style="margin-top:1rem">
-          <label class="field-label">Additional comments (optional)</label>
-          <textarea id="s1comment" placeholder="Any context about your goals…"></textarea>
+          <label class="field-label">ملاحظات إضافية (اختياري)</label>
+          <textarea id="s1comment" placeholder="أي توضيح إضافي عن أهدافك…"></textarea>
         </div>
       </div>
     </div>
@@ -662,23 +662,23 @@ function doGet() {
       <div class="section-head">
         <div class="section-num">2</div>
         <div class="section-head-text">
-          <h2>Friction Diagnostic</h2>
-          <p>Only answer if you selected 🟡 or 🔴 above — skip if all green</p>
+          <h2>تشخيص العقبات</h2>
+          <p>يُملأ فقط إذا اختَرت 🟡 أو 🔴 بالأعلى — تجاوزه إذا كانت كل الأهداف خضراء</p>
         </div>
       </div>
       <div class="section-body">
-        <div class="friction-note">⚠️ Skip this section if all your goals are on track or no longer relevant</div>
-        <label class="field-label" style="margin-bottom:10px;">Primary blocker:</label>
+        <div class="friction-note">⚠️ تجاوز هذا القسم إذا كانت كل أهدافك على المسار الصحيح أو لم تعد ذات صلة</div>
+        <label class="field-label" style="margin-bottom:10px;">العقبة الأساسية:</label>
         <div class="blocker-grid">
-          <div><input type="radio" class="blocker-radio" name="blocker" id="bl1" value="Workload"><label class="blocker-lbl" for="bl1"><span class="icon">⏳</span>Workload</label></div>
-          <div><input type="radio" class="blocker-radio" name="blocker" id="bl2" value="Clarity"><label class="blocker-lbl" for="bl2"><span class="icon">❓</span>Clarity</label></div>
-          <div><input type="radio" class="blocker-radio" name="blocker" id="bl3" value="Resources"><label class="blocker-lbl" for="bl3"><span class="icon">🔧</span>Resources</label></div>
-          <div><input type="radio" class="blocker-radio" name="blocker" id="bl4" value="Passion/Relevance"><label class="blocker-lbl" for="bl4"><span class="icon">💡</span>Passion / Relevance</label></div>
-          <div><input type="radio" class="blocker-radio" name="blocker" id="bl5" value="Dependency"><label class="blocker-lbl" for="bl5"><span class="icon">🔗</span>Dependency</label></div>
-          <div><input type="radio" class="blocker-radio" name="blocker" id="bl6" value="Personal Capacity"><label class="blocker-lbl" for="bl6"><span class="icon">🙏</span>Personal Capacity</label></div>
+          <div><input type="radio" class="blocker-radio" name="blocker" id="bl1" value="Workload"><label class="blocker-lbl" for="bl1"><span class="icon">⏳</span>ضغط العمل</label></div>
+          <div><input type="radio" class="blocker-radio" name="blocker" id="bl2" value="Clarity"><label class="blocker-lbl" for="bl2"><span class="icon">❓</span>عدم وضوح</label></div>
+          <div><input type="radio" class="blocker-radio" name="blocker" id="bl3" value="Resources"><label class="blocker-lbl" for="bl3"><span class="icon">🔧</span>نقص الموارد</label></div>
+          <div><input type="radio" class="blocker-radio" name="blocker" id="bl4" value="Passion/Relevance"><label class="blocker-lbl" for="bl4"><span class="icon">💡</span>الشغف / الأهمية</label></div>
+          <div><input type="radio" class="blocker-radio" name="blocker" id="bl5" value="Dependency"><label class="blocker-lbl" for="bl5"><span class="icon">🔗</span>اعتمادية على غيري</label></div>
+          <div><input type="radio" class="blocker-radio" name="blocker" id="bl6" value="Personal Capacity"><label class="blocker-lbl" for="bl6"><span class="icon">🙏</span>ظروف شخصية</label></div>
         </div>
-        <label class="field-label">Describe the situation in one sentence:</label>
-        <textarea id="blockerdesc" placeholder="e.g. I'm waiting for design assets before I can proceed…"></textarea>
+        <label class="field-label">صف الموقف في جملة واحدة:</label>
+        <textarea id="blockerdesc" placeholder="مثال: أنتظر تسليم التصميمات لأتمكن من المتابعة…"></textarea>
       </div>
     </div>
 
@@ -687,104 +687,104 @@ function doGet() {
       <div class="section-head">
         <div class="section-num">3</div>
         <div class="section-head-text">
-          <h2>Learning &amp; Course Effectiveness</h2>
-          <p>List up to 5 learning activities this month</p>
+          <h2>التعلم وفعالية الدورات</h2>
+          <p>أضف حتى 5 أنشطة تعليمية لهذا الشهر</p>
         </div>
       </div>
       <div class="section-body">
         <!-- Activity 1 -->
         <div class="activity-block">
-          <div class="activity-title">📚 Activity 1</div>
+          <div class="activity-title">📚 النشاط 1</div>
           <div class="activity-row">
-            <div><label class="field-label">Course name or link</label><input class="act-input" type="text" id="c1name" placeholder="e.g. Google PM Certificate" /></div>
-            <div><label class="field-label">Completion status</label>
+            <div><label class="field-label">اسم الدورة أو رابطها</label><input class="act-input" type="text" id="c1name" placeholder="مثال: شهادة إدارة المشاريع من جوجل" /></div>
+            <div><label class="field-label">حالة الإنجاز</label>
               <div class="pill-group">
-                <input type="radio" class="pill-radio p-done"     name="c1s" id="c1s1" value="Completed"><label class="pill-lbl" for="c1s1">Completed</label>
-                <input type="radio" class="pill-radio p-progress" name="c1s" id="c1s2" value="In Progress"><label class="pill-lbl" for="c1s2">In Progress</label>
-                <input type="radio" class="pill-radio p-abandon"  name="c1s" id="c1s3" value="Abandoned"><label class="pill-lbl" for="c1s3">Abandoned</label>
+                <input type="radio" class="pill-radio p-done"     name="c1s" id="c1s1" value="Completed"><label class="pill-lbl" for="c1s1">مكتمل</label>
+                <input type="radio" class="pill-radio p-progress" name="c1s" id="c1s2" value="In Progress"><label class="pill-lbl" for="c1s2">قيد التنفيذ</label>
+                <input type="radio" class="pill-radio p-abandon"  name="c1s" id="c1s3" value="Abandoned"><label class="pill-lbl" for="c1s3">متوقف</label>
               </div>
             </div>
           </div>
-          <label class="field-label">"I've already applied a concept from this to my work"</label>
+          <label class="field-label">"بدأت بالفعل في تطبيق ما تعلمته في عملي"</label>
           <div style="display:flex;align-items:center;">
             <div class="score-group"><input type="radio" class="score-radio" name="sc1" id="sc1-1" value="1"><label class="score-lbl" for="sc1-1">1</label><input type="radio" class="score-radio" name="sc1" id="sc1-2" value="2"><label class="score-lbl" for="sc1-2">2</label><input type="radio" class="score-radio" name="sc1" id="sc1-3" value="3"><label class="score-lbl" for="sc1-3">3</label><input type="radio" class="score-radio" name="sc1" id="sc1-4" value="4"><label class="score-lbl" for="sc1-4">4</label><input type="radio" class="score-radio" name="sc1" id="sc1-5" value="5"><label class="score-lbl" for="sc1-5">5</label></div>
-            <span class="score-hint">1 = strongly disagree · 5 = strongly agree</span>
+            <span class="score-hint">1 = غير موافق تمامًا · 5 = موافق تمامًا</span>
           </div>
         </div>
         <!-- Activity 2 -->
         <div class="activity-block">
-          <div class="activity-title">📚 Activity 2</div>
+          <div class="activity-title">📚 النشاط 2</div>
           <div class="activity-row">
-            <div><label class="field-label">Course name or link</label><input class="act-input" type="text" id="c2name" placeholder="e.g. Advanced Excel workshop" /></div>
-            <div><label class="field-label">Completion status</label>
+            <div><label class="field-label">اسم الدورة أو رابطها</label><input class="act-input" type="text" id="c2name" placeholder="مثال: ورشة إكسل المتقدم" /></div>
+            <div><label class="field-label">حالة الإنجاز</label>
               <div class="pill-group">
-                <input type="radio" class="pill-radio p-done"     name="c2s" id="c2s1" value="Completed"><label class="pill-lbl" for="c2s1">Completed</label>
-                <input type="radio" class="pill-radio p-progress" name="c2s" id="c2s2" value="In Progress"><label class="pill-lbl" for="c2s2">In Progress</label>
-                <input type="radio" class="pill-radio p-abandon"  name="c2s" id="c2s3" value="Abandoned"><label class="pill-lbl" for="c2s3">Abandoned</label>
+                <input type="radio" class="pill-radio p-done"     name="c2s" id="c2s1" value="Completed"><label class="pill-lbl" for="c2s1">مكتمل</label>
+                <input type="radio" class="pill-radio p-progress" name="c2s" id="c2s2" value="In Progress"><label class="pill-lbl" for="c2s2">قيد التنفيذ</label>
+                <input type="radio" class="pill-radio p-abandon"  name="c2s" id="c2s3" value="Abandoned"><label class="pill-lbl" for="c2s3">متوقف</label>
               </div>
             </div>
           </div>
-          <label class="field-label">Usefulness score</label>
+          <label class="field-label">درجة الفائدة</label>
           <div style="display:flex;align-items:center;">
             <div class="score-group"><input type="radio" class="score-radio" name="sc2" id="sc2-1" value="1"><label class="score-lbl" for="sc2-1">1</label><input type="radio" class="score-radio" name="sc2" id="sc2-2" value="2"><label class="score-lbl" for="sc2-2">2</label><input type="radio" class="score-radio" name="sc2" id="sc2-3" value="3"><label class="score-lbl" for="sc2-3">3</label><input type="radio" class="score-radio" name="sc2" id="sc2-4" value="4"><label class="score-lbl" for="sc2-4">4</label><input type="radio" class="score-radio" name="sc2" id="sc2-5" value="5"><label class="score-lbl" for="sc2-5">5</label></div>
-            <span class="score-hint">1 = strongly disagree · 5 = strongly agree</span>
+            <span class="score-hint">1 = غير موافق تمامًا · 5 = موافق تمامًا</span>
           </div>
         </div>
         <!-- Activity 3 -->
         <div class="activity-block">
-          <div class="activity-title">📚 Activity 3 <span style="font-weight:400;font-size:11px;color:var(--gray)">(optional)</span></div>
+          <div class="activity-title">📚 النشاط 3 <span style="font-weight:400;font-size:11px;color:var(--gray)">(اختياري)</span></div>
           <div class="activity-row">
-            <div><label class="field-label">Course name or link</label><input class="act-input" type="text" id="c3name" placeholder="e.g. Leadership workshop" /></div>
-            <div><label class="field-label">Completion status</label>
+            <div><label class="field-label">اسم الدورة أو رابطها</label><input class="act-input" type="text" id="c3name" placeholder="مثال: ورشة القيادة" /></div>
+            <div><label class="field-label">حالة الإنجاز</label>
               <div class="pill-group">
-                <input type="radio" class="pill-radio p-done"     name="c3s" id="c3s1" value="Completed"><label class="pill-lbl" for="c3s1">Completed</label>
-                <input type="radio" class="pill-radio p-progress" name="c3s" id="c3s2" value="In Progress"><label class="pill-lbl" for="c3s2">In Progress</label>
-                <input type="radio" class="pill-radio p-abandon"  name="c3s" id="c3s3" value="Abandoned"><label class="pill-lbl" for="c3s3">Abandoned</label>
+                <input type="radio" class="pill-radio p-done"     name="c3s" id="c3s1" value="Completed"><label class="pill-lbl" for="c3s1">مكتمل</label>
+                <input type="radio" class="pill-radio p-progress" name="c3s" id="c3s2" value="In Progress"><label class="pill-lbl" for="c3s2">قيد التنفيذ</label>
+                <input type="radio" class="pill-radio p-abandon"  name="c3s" id="c3s3" value="Abandoned"><label class="pill-lbl" for="c3s3">متوقف</label>
               </div>
             </div>
           </div>
-          <label class="field-label">Usefulness score</label>
+          <label class="field-label">درجة الفائدة</label>
           <div style="display:flex;align-items:center;">
             <div class="score-group"><input type="radio" class="score-radio" name="sc3" id="sc3-1" value="1"><label class="score-lbl" for="sc3-1">1</label><input type="radio" class="score-radio" name="sc3" id="sc3-2" value="2"><label class="score-lbl" for="sc3-2">2</label><input type="radio" class="score-radio" name="sc3" id="sc3-3" value="3"><label class="score-lbl" for="sc3-3">3</label><input type="radio" class="score-radio" name="sc3" id="sc3-4" value="4"><label class="score-lbl" for="sc3-4">4</label><input type="radio" class="score-radio" name="sc3" id="sc3-5" value="5"><label class="score-lbl" for="sc3-5">5</label></div>
-            <span class="score-hint">1 = strongly disagree · 5 = strongly agree</span>
+            <span class="score-hint">1 = غير موافق تمامًا · 5 = موافق تمامًا</span>
           </div>
         </div>
         <!-- Activity 4 -->
         <div class="activity-block">
-          <div class="activity-title">📚 Activity 4 <span style="font-weight:400;font-size:11px;color:var(--gray)">(optional)</span></div>
+          <div class="activity-title">📚 النشاط 4 <span style="font-weight:400;font-size:11px;color:var(--gray)">(اختياري)</span></div>
           <div class="activity-row">
-            <div><label class="field-label">Course name or link</label><input class="act-input" type="text" id="c4name" placeholder="e.g. Data analysis course" /></div>
-            <div><label class="field-label">Completion status</label>
+            <div><label class="field-label">اسم الدورة أو رابطها</label><input class="act-input" type="text" id="c4name" placeholder="مثال: دورة تحليل البيانات" /></div>
+            <div><label class="field-label">حالة الإنجاز</label>
               <div class="pill-group">
-                <input type="radio" class="pill-radio p-done"     name="c4s" id="c4s1" value="Completed"><label class="pill-lbl" for="c4s1">Completed</label>
-                <input type="radio" class="pill-radio p-progress" name="c4s" id="c4s2" value="In Progress"><label class="pill-lbl" for="c4s2">In Progress</label>
-                <input type="radio" class="pill-radio p-abandon"  name="c4s" id="c4s3" value="Abandoned"><label class="pill-lbl" for="c4s3">Abandoned</label>
+                <input type="radio" class="pill-radio p-done"     name="c4s" id="c4s1" value="Completed"><label class="pill-lbl" for="c4s1">مكتمل</label>
+                <input type="radio" class="pill-radio p-progress" name="c4s" id="c4s2" value="In Progress"><label class="pill-lbl" for="c4s2">قيد التنفيذ</label>
+                <input type="radio" class="pill-radio p-abandon"  name="c4s" id="c4s3" value="Abandoned"><label class="pill-lbl" for="c4s3">متوقف</label>
               </div>
             </div>
           </div>
-          <label class="field-label">Usefulness score</label>
+          <label class="field-label">درجة الفائدة</label>
           <div style="display:flex;align-items:center;">
             <div class="score-group"><input type="radio" class="score-radio" name="sc4" id="sc4-1" value="1"><label class="score-lbl" for="sc4-1">1</label><input type="radio" class="score-radio" name="sc4" id="sc4-2" value="2"><label class="score-lbl" for="sc4-2">2</label><input type="radio" class="score-radio" name="sc4" id="sc4-3" value="3"><label class="score-lbl" for="sc4-3">3</label><input type="radio" class="score-radio" name="sc4" id="sc4-4" value="4"><label class="score-lbl" for="sc4-4">4</label><input type="radio" class="score-radio" name="sc4" id="sc4-5" value="5"><label class="score-lbl" for="sc4-5">5</label></div>
-            <span class="score-hint">1 = strongly disagree · 5 = strongly agree</span>
+            <span class="score-hint">1 = غير موافق تمامًا · 5 = موافق تمامًا</span>
           </div>
         </div>
         <!-- Activity 5 -->
         <div class="activity-block">
-          <div class="activity-title">📚 Activity 5 <span style="font-weight:400;font-size:11px;color:var(--gray)">(optional)</span></div>
+          <div class="activity-title">📚 النشاط 5 <span style="font-weight:400;font-size:11px;color:var(--gray)">(اختياري)</span></div>
           <div class="activity-row">
-            <div><label class="field-label">Course name or link</label><input class="act-input" type="text" id="c5name" placeholder="e.g. Communication skills book" /></div>
-            <div><label class="field-label">Completion status</label>
+            <div><label class="field-label">اسم الدورة أو رابطها</label><input class="act-input" type="text" id="c5name" placeholder="مثال: كتاب عن مهارات التواصل" /></div>
+            <div><label class="field-label">حالة الإنجاز</label>
               <div class="pill-group">
-                <input type="radio" class="pill-radio p-done"     name="c5s" id="c5s1" value="Completed"><label class="pill-lbl" for="c5s1">Completed</label>
-                <input type="radio" class="pill-radio p-progress" name="c5s" id="c5s2" value="In Progress"><label class="pill-lbl" for="c5s2">In Progress</label>
-                <input type="radio" class="pill-radio p-abandon"  name="c5s" id="c5s3" value="Abandoned"><label class="pill-lbl" for="c5s3">Abandoned</label>
+                <input type="radio" class="pill-radio p-done"     name="c5s" id="c5s1" value="Completed"><label class="pill-lbl" for="c5s1">مكتمل</label>
+                <input type="radio" class="pill-radio p-progress" name="c5s" id="c5s2" value="In Progress"><label class="pill-lbl" for="c5s2">قيد التنفيذ</label>
+                <input type="radio" class="pill-radio p-abandon"  name="c5s" id="c5s3" value="Abandoned"><label class="pill-lbl" for="c5s3">متوقف</label>
               </div>
             </div>
           </div>
-          <label class="field-label">Usefulness score</label>
+          <label class="field-label">درجة الفائدة</label>
           <div style="display:flex;align-items:center;">
             <div class="score-group"><input type="radio" class="score-radio" name="sc5" id="sc5-1" value="1"><label class="score-lbl" for="sc5-1">1</label><input type="radio" class="score-radio" name="sc5" id="sc5-2" value="2"><label class="score-lbl" for="sc5-2">2</label><input type="radio" class="score-radio" name="sc5" id="sc5-3" value="3"><label class="score-lbl" for="sc5-3">3</label><input type="radio" class="score-radio" name="sc5" id="sc5-4" value="4"><label class="score-lbl" for="sc5-4">4</label><input type="radio" class="score-radio" name="sc5" id="sc5-5" value="5"><label class="score-lbl" for="sc5-5">5</label></div>
-            <span class="score-hint">1 = strongly disagree · 5 = strongly agree</span>
+            <span class="score-hint">1 = غير موافق تمامًا · 5 = موافق تمامًا</span>
           </div>
         </div>
       </div>
@@ -795,25 +795,25 @@ function doGet() {
       <div class="section-head">
         <div class="section-num">4</div>
         <div class="section-head-text">
-          <h2>The Single Most Valuable Question</h2>
-          <p>The most important section — take your time</p>
+          <h2>السؤال الأكثر أهمية</h2>
+          <p>أهم قسم في التقييم — خذ وقتك في الإجابة</p>
         </div>
       </div>
       <div class="section-body">
         <div class="mvq-block">
-          <label class="field-label">4a. What ONE thing, if improved next month, would make the biggest difference in your work?</label>
-          <textarea id="s4a" style="min-height:80px;" placeholder="Think about your current challenges and projects…"></textarea>
+          <label class="field-label">4أ. ما الأمر الواحد الذي لو تطور الشهر القادم، سيُحدث أكبر فرق في عملك؟</label>
+          <textarea id="s4a" style="min-height:80px;" placeholder="فكّر في تحدياتك ومشاريعك الحالية…"></textarea>
         </div>
         <div class="mvq-block">
-          <label class="field-label">4b. Share a micro-win — a moment this month where you applied something new or handled something better than before</label>
-          <textarea id="s4b" style="min-height:80px;" placeholder="Even small wins count — e.g. 'I used the new technique and saved 2 hours'…"></textarea>
+          <label class="field-label">4ب. شارك إنجازًا صغيرًا — لحظة هذا الشهر طبّقت فيها شيئًا جديدًا أو تعاملت مع موقف بشكل أفضل من قبل</label>
+          <textarea id="s4b" style="min-height:80px;" placeholder="كل إنجاز له قيمة — مثال: 'استخدمت طريقة جديدة وفّرت عليّ ساعتين من العمل'…"></textarea>
         </div>
       </div>
     </div>
 
     <div class="submit-area">
-      <button class="btn-submit" id="submit-btn" onclick="submitForm()">Submit Check-in</button>
-      <p class="submit-hint" id="submit-hint">Response will be saved to the HR team's Google Sheet</p>
+      <button class="btn-submit" id="submit-btn" onclick="submitForm()">إرسال التقييم</button>
+      <p class="submit-hint" id="submit-hint">سيتم حفظ إجابتك في ملف جوجل شيت الخاص بـمسؤولة التطوير حبيبة حجازي</p>
     </div>
   </div><!-- /form-content -->
 
@@ -825,20 +825,20 @@ function doGet() {
 <div class="page">
   <div class="mgr-header">
     <div>
-      <h2>📊 HR Team Dashboard</h2>
-      <p>All employee responses — live data</p>
+      <h2>📊 لوحة مسؤولة التطوير حبيبة حجازي</h2>
+      <p>كل إجابات الموظفين — بيانات مباشرة</p>
     </div>
-    <button class="btn-topbar" onclick="goBack()">← Back</button>
+    <button class="btn-topbar" onclick="goBack()">← رجوع</button>
   </div>
   <div class="kpi-row">
-    <div class="kpi-card k-all"><div class="kpi-num" id="kpi-total">0</div><div class="kpi-lbl">Total Responses</div></div>
-    <div class="kpi-card k-green"><div class="kpi-num" id="kpi-green">0</div><div class="kpi-lbl">✅ No Meeting</div></div>
-    <div class="kpi-card k-amber"><div class="kpi-num" id="kpi-amber">0</div><div class="kpi-lbl">📞 15-Min Call</div></div>
-    <div class="kpi-card k-red"><div class="kpi-num" id="kpi-red">0</div><div class="kpi-lbl">🗓 Full Meeting</div></div>
+    <div class="kpi-card k-all"><div class="kpi-num" id="kpi-total">0</div><div class="kpi-lbl">عدد الإجابات</div></div>
+    <div class="kpi-card k-green"><div class="kpi-num" id="kpi-green">0</div><div class="kpi-lbl">✅ بدون اجتماع</div></div>
+    <div class="kpi-card k-amber"><div class="kpi-num" id="kpi-amber">0</div><div class="kpi-lbl">📞 مكالمة 15 دقيقة</div></div>
+    <div class="kpi-card k-red"><div class="kpi-num" id="kpi-red">0</div><div class="kpi-lbl">🗓 اجتماع كامل</div></div>
   </div>
   <div style="display:flex;gap:8px;margin-bottom:12px;">
-    <button class="btn-export" onclick="exportCSV()">⬇ Export CSV</button>
-    <button class="btn-export" onclick="clearAll()" style="color:var(--red);border-color:var(--red-l);">🗑 Clear All</button>
+    <button class="btn-export" onclick="exportCSV()">⬇ تصدير CSV</button>
+    <button class="btn-export" onclick="clearAll()" style="color:var(--red);border-color:var(--red-l);">🗑 حذف الكل</button>
   </div>
   <div class="emp-list" id="emp-list"></div>
 </div>
@@ -904,9 +904,9 @@ function updateConnectionStatus() {
   const dot = document.getElementById('connection-dot');
   const banner = document.getElementById('setup-banner');
   if (url) {
-    dot.textContent = '🟢 Connected'; dot.style.color = '#4CAF50';
+    dot.textContent = '🟢 متصل'; dot.style.color = '#4CAF50';
     banner.className = 'setup-banner connected';
-    banner.innerHTML = '✅ <strong>Connected to Google Sheets.</strong> Responses go directly to your sheet.';
+    banner.innerHTML = '✅ <strong>تم الربط مع جوجل شيت.</strong> الإجابات تُحفظ مباشرة في ملفك.';
   } else {
     dot.textContent = '⚪ Not connected'; dot.style.color = '#aaa';
   }
@@ -917,11 +917,11 @@ function closeModal() { document.getElementById('setup-modal').classList.remove(
 
 function saveWebhookUrl() {
   const url = document.getElementById('webhook-url-input').value.trim();
-  if (!url || !url.startsWith('https://script.google.com')) { alert('Please paste a valid Google Apps Script URL.'); return; }
+  if (!url || !url.startsWith('https://script.google.com')) { alert('من فضلك ألصق رابط Google Apps Script صحيح.'); return; }
   localStorage.setItem(WEBHOOK_KEY, url);
   updateConnectionStatus();
   closeModal();
-  alert('✅ Connected! Form now sends to your Google Sheet.');
+  alert('✅ تم الربط بنجاح! النموذج الآن يرسل البيانات إلى جوجل شيت.');
 }
 
 function copyScript() {
@@ -942,9 +942,9 @@ function decideAction() {
 
 async function submitForm() {
   const name = document.getElementById('emp-name').value.trim();
-  if (!name) { alert('Please enter your name before submitting.'); return; }
+  if (!name) { alert('من فضلك أدخل اسمك قبل الإرسال.'); return; }
   const webhookUrl = getWebhookUrl();
-  if (!webhookUrl) { if (!confirm('Not connected to Google Sheets.\nSubmit anyway (data will be lost)?')) return; }
+  if (!webhookUrl) { if (!confirm('لم يتم الربط مع جوجل شيت.\nهل تريد الإرسال على أي حال؟ (سيتم فقد البيانات)')) return; }
 
   const gv = n => document.querySelector(`input[name="g${n}"]:checked`)?.value || '';
   const cv = n => document.querySelector(`input[name="c${n}s"]:checked`)?.value || '';
@@ -986,7 +986,7 @@ async function submitForm() {
   } catch(err) {
     document.getElementById('sending-overlay').classList.remove('show');
     document.getElementById('submit-btn').disabled = false;
-    alert('Error sending. Check your internet connection and try again.');
+    alert('حدث خطأ في الإرسال. تأكد من اتصالك بالإنترنت وحاول مرة أخرى.');
   }
 }
 
@@ -1015,35 +1015,36 @@ function renderDashboard() {
   document.getElementById('kpi-red').textContent   = responses.filter(r => r.action === 'Full Meeting').length;
   const list = document.getElementById('emp-list');
   if (!responses.length) {
-    list.innerHTML = '<div class="empty-state"><div style="font-size:40px">📭</div><p style="margin-top:8px">No responses yet.</p></div>';
+    list.innerHTML = '<div class="empty-state"><div style="font-size:40px">📭</div><p style="margin-top:8px">لا توجد إجابات حتى الآن.</p></div>';
     return;
   }
   list.innerHTML = responses.map((r, idx) => empCardHTML(r, idx)).join('');
 }
 
 function empCardHTML(r, idx) {
-  const badge = r.action === 'No Meeting' ? `<span class="action-badge badge-green">✅ No Meeting</span>` :
-                r.action === '15-Min Call' ? `<span class="action-badge badge-amber">📞 15-Min Call</span>` :
-                                             `<span class="action-badge badge-red">🗓 Full Meeting</span>`;
+  const badge = r.action === 'No Meeting' ? `<span class="action-badge badge-green">✅ بدون اجتماع</span>` :
+                r.action === '15-Min Call' ? `<span class="action-badge badge-amber">📞 مكالمة 15 دقيقة</span>` :
+                                             `<span class="action-badge badge-red">🗓 اجتماع كامل</span>`;
   const statusMap = { 'On Track': 'gp-green', 'Slow': 'gp-amber', 'No Progress': 'gp-red', 'No Longer Fits': 'gp-gray' };
   const iconMap   = { 'On Track': '✅', 'Slow': '🟡', 'No Progress': '🔴', 'No Longer Fits': '⬜' };
+  const blockerAr = { 'Workload':'ضغط العمل', 'Clarity':'عدم وضوح', 'Resources':'نقص الموارد', 'Passion/Relevance':'الشغف / الأهمية', 'Dependency':'اعتمادية على غيري', 'Personal Capacity':'ظروف شخصية' };
   const goals = [1,2,3,4,5].map(i => ({ name: r[`g${i}name`], status: r[`g${i}status`] }))
     .filter(g => g.name || g.status)
     .map(g => `<span class="goal-pill ${statusMap[g.status]||'gp-gray'}">${iconMap[g.status]||''} ${g.name||'—'}</span>`).join('');
-  const courses = [1,2,3,4,5].map(i => r[`c${i}name`] ? `<div class="detail-row"><span class="lbl">${r[`c${i}name`]}</span><span class="val">${r[`c${i}status`]||'—'}${r[`c${i}score`] ? ' · Score '+r[`c${i}score`]+'/5':''}</span></div>` : '').join('');
+  const courses = [1,2,3,4,5].map(i => r[`c${i}name`] ? `<div class="detail-row"><span class="lbl">${r[`c${i}name`]}</span><span class="val">${r[`c${i}status`]||'—'}${r[`c${i}score`] ? ' · التقييم '+r[`c${i}score`]+'/5':''}</span></div>` : '').join('');
   return `<div class="emp-card">
     <div class="emp-card-head" onclick="toggleCard(${idx})">
       <div><div class="emp-name">${r.name}</div><div class="emp-month">${r.month||'—'} · ${r.submittedAt}</div></div>
       ${badge}
     </div>
     <div class="emp-card-body" id="cb-${idx}">
-      ${goals ? `<div class="detail-section"><h4>Goals</h4><div class="goals-pills">${goals}</div></div>` : ''}
-      ${r.blocker ? `<div class="detail-section"><h4>Blocker</h4><div class="detail-row"><span class="lbl">Type</span><span class="val">${r.blocker}</span></div>${r.blockerDesc?`<div class="text-preview">${r.blockerDesc}</div>`:''}</div>` : ''}
-      ${courses ? `<div class="detail-section"><h4>Learning</h4>${courses}</div>` : ''}
-      ${r.s4a ? `<div class="detail-section"><h4>Key Development Need</h4><div class="text-preview">${r.s4a}</div></div>` : ''}
-      ${r.s4b ? `<div class="detail-section"><h4>Micro-Win</h4><div class="text-preview">${r.s4b}</div></div>` : ''}
+      ${goals ? `<div class="detail-section"><h4>الأهداف</h4><div class="goals-pills">${goals}</div></div>` : ''}
+      ${r.blocker ? `<div class="detail-section"><h4>العقبة</h4><div class="detail-row"><span class="lbl">النوع</span><span class="val">${blockerAr[r.blocker]||r.blocker}</span></div>${r.blockerDesc?`<div class="text-preview">${r.blockerDesc}</div>`:''}</div>` : ''}
+      ${courses ? `<div class="detail-section"><h4>التعلم</h4>${courses}</div>` : ''}
+      ${r.s4a ? `<div class="detail-section"><h4>أهم احتياج تطويري</h4><div class="text-preview">${r.s4a}</div></div>` : ''}
+      ${r.s4b ? `<div class="detail-section"><h4>إنجاز صغير</h4><div class="text-preview">${r.s4b}</div></div>` : ''}
       <div style="margin-top:10px;text-align:right">
-        <button onclick="deleteResp(${r.id})" style="background:none;border:none;color:var(--red);font-size:12px;cursor:pointer;font-family:inherit">🗑 Delete this response</button>
+        <button onclick="deleteResp(${r.id})" style="background:none;border:none;color:var(--red);font-size:12px;cursor:pointer;font-family:inherit">🗑 حذف هذه الإجابة</button>
       </div>
     </div>
   </div>`;
@@ -1052,21 +1053,21 @@ function empCardHTML(r, idx) {
 function toggleCard(idx) { document.getElementById('cb-'+idx).classList.toggle('open'); }
 
 function deleteResp(id) {
-  if (!confirm('Delete this response?')) return;
+  if (!confirm('هل تريد حذف هذه الإجابة؟')) return;
   const arr = JSON.parse(localStorage.getItem(RESPONSES_KEY) || '[]').filter(r => r.id !== id);
   localStorage.setItem(RESPONSES_KEY, JSON.stringify(arr));
   renderDashboard();
 }
 
 function clearAll() {
-  if (!confirm('Delete ALL responses? This cannot be undone.')) return;
+  if (!confirm('هل تريد حذف كل الإجابات؟ لا يمكن التراجع عن هذا الإجراء.')) return;
   localStorage.removeItem(RESPONSES_KEY);
   renderDashboard();
 }
 
 function exportCSV() {
   const responses = JSON.parse(localStorage.getItem(RESPONSES_KEY) || '[]');
-  if (!responses.length) { alert('No responses to export.'); return; }
+  if (!responses.length) { alert('لا توجد إجابات لتصديرها.'); return; }
   const hdrs = ['Name','Month','Submitted','G1','G1S','G2','G2S','G3','G3S','G4','G4S','G5','G5S','Comment','Blocker','Blocker Desc','C1','C1S','C1Score','C2','C2S','C2Score','C3','C3S','C3Score','C4','C4S','C4Score','C5','C5S','C5Score','Key Dev','Micro-Win','Action'];
   const rows = responses.map(r => [
     r.name, r.month, r.submittedAt,
