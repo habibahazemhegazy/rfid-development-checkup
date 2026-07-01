@@ -1383,10 +1383,13 @@ async function deleteResp(id) {
   loadDashboardFromSheet(); // re-fetch so remaining ids re-sequence
 }
 
-function clearAll() {
+async function clearAll() {
   if (!confirm(t('alertDeleteAll'))) return;
   localStorage.removeItem(RESPONSES_KEY);
   renderDashboard();
+  await fetch(WEBHOOK_URL, { method:'POST', mode:'no-cors',
+    headers:{'Content-Type':'application/json'}, body: JSON.stringify({ action:'clearAll' }) });
+  loadDashboardFromSheet();
 }
 
 function exportCSV() {

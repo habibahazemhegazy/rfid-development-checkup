@@ -69,6 +69,14 @@ function deleteResponse_(d) {
   return { status: "ok" };
 }
 
+// ── RFID: DELETE ALL (one request) ──
+function clearResponses_() {
+  const sheet = rfidSheet_();
+  const n = sheet.getLastRow() - 1;       // data rows (below the header)
+  if (n > 0) sheet.deleteRows(2, n);
+  return { status: "ok" };
+}
+
 // ── ROUTERS (only ones in the project) ──
 function doGet(e) {
   const action = e && e.parameter ? e.parameter.action : "";
@@ -81,7 +89,10 @@ function doPost(e) {
   try {
     const d = JSON.parse(e.postData.contents);
     if (d.action === "delete")        return json_(deleteResponse_(d)); // RFID
+    if (d.action === "clearAll")      return json_(clearResponses_());  // RFID
     if (d.action === "managerSubmit") return json_(managerCreate_(d));  // Manager
+    if (d.action === "managerDelete") return json_(managerDelete_(d));  // Manager
+    if (d.action === "clearManager")  return json_(clearManager_());    // Manager
     return json_(createResponse_(d));                                   // RFID create
   } catch (err) {
     return json_({ status: "error", message: err.toString() });
