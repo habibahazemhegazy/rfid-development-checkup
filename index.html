@@ -1235,7 +1235,7 @@ async function submitForm() {
   const sv = n => document.querySelector(`input[name="sc${n}"]:checked`)?.value || '';
 
   const payload = {
-    name, month: (()=>{ const ms=document.getElementById('month-sel'); const ys=document.getElementById('year-sel'); return (T.en['m'+ms.value] || ms.value) + ' ' + ys.value; })(),
+    name: nameEl.value.trim(), month: (()=>{ const ms=document.getElementById('month-sel'); const ys=document.getElementById('year-sel'); return (T.en['m'+ms.value] || ms.value) + ' ' + ys.value; })(),
     g1name: document.getElementById('g1name').value.trim(), g1status: gv(1),
     g2name: document.getElementById('g2name').value.trim(), g2status: gv(2),
     g3name: document.getElementById('g3name').value.trim(), g3status: gv(3),
@@ -1372,11 +1372,15 @@ function empCardHTML(r, idx) {
 
 function toggleCard(idx) { document.getElementById('cb-'+idx).classList.toggle('open'); }
 
-function deleteResp(id) {
+async function deleteResp(id) {
   if (!confirm(t('alertDeleteOne'))) return;
   const arr = JSON.parse(localStorage.getItem(RESPONSES_KEY) || '[]').filter(r => r.id !== id);
   localStorage.setItem(RESPONSES_KEY, JSON.stringify(arr));
   renderDashboard();
+  // id is the sheet's 0-based row position (row = id + 2); tell the backend to delete it
+  await fetch(WEBHOOK_URL, { method:'POST', mode:'no-cors',
+    headers:{'Content-Type':'application/json'}, body: JSON.stringify({ action:'delete', id }) });
+  loadDashboardFromSheet(); // re-fetch so remaining ids re-sequence
 }
 
 function clearAll() {
